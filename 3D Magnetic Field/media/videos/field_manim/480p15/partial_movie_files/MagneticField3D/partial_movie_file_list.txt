@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/3D Magnetic Field/media/videos/field_manim/480p15/partial_movie_files/MagneticField3D/1336398021_287308598_4244833857.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/3D Magnetic Field/media/videos/field_manim/480p15/partial_movie_files/MagneticField3D/3984027242_2068277886_1067674844.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/3D Magnetic Field/media/videos/field_manim/480p15/partial_movie_files/MagneticField3D/3984027242_1863759520_2112984545.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/3D Magnetic Field/media/videos/field_manim/480p15/partial_movie_files/MagneticField3D/3984027242_2068277886_1241730556.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/3D Magnetic Field/media/videos/field_manim/480p15/partial_movie_files/MagneticField3D/3984027242_1863759520_113739645.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/3D Magnetic Field/media/videos/field_manim/480p15/partial_movie_files/MagneticField3D/3984027242_2068277886_3296823812.mp4'

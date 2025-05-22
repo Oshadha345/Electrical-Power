@@ -1,0 +1,8 @@
+# This file is used internally by FFMPEG.
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/Magnetic Field Simu/media/videos/manim/480p15/partial_movie_files/MagneticFieldAroundWire/1185818338_3400209096_223132457.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/Magnetic Field Simu/media/videos/manim/480p15/partial_movie_files/MagneticFieldAroundWire/624642324_1236361019_463403952.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/Magnetic Field Simu/media/videos/manim/480p15/partial_movie_files/MagneticFieldAroundWire/624642324_3388252785_979021972.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/Magnetic Field Simu/media/videos/manim/480p15/partial_movie_files/MagneticFieldAroundWire/624642324_48758040_1212944989.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/Magnetic Field Simu/media/videos/manim/480p15/partial_movie_files/MagneticFieldAroundWire/624642324_1940869912_1071841447.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/Magnetic Field Simu/media/videos/manim/480p15/partial_movie_files/MagneticFieldAroundWire/624642324_4070917045_2079149368.mp4'
+file 'file:S:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/Magnetic Field Simu/media/videos/manim/480p15/partial_movie_files/MagneticFieldAroundWire/624642324_667144672_4074491513.mp4'
