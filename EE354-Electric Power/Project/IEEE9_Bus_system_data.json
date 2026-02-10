@@ -1,0 +1,101 @@
+{
+    "_comment": "IEEE 9-Bus System Data for Power Flow Analysis",
+    
+    "bus_data": {
+        "_comment": "Bus data containing bus number and base voltage in kV",
+        "buses": [
+            { "bus_number": 1, "base_kV": 16.5 },
+            { "bus_number": 2, "base_kV": 18.0 },
+            { "bus_number": 3, "base_kV": 13.8 },
+            { "bus_number": 4, "base_kV": 230.0 },
+            { "bus_number": 5, "base_kV": 230.0 },
+            { "bus_number": 6, "base_kV": 230.0 },
+            { "bus_number": 7, "base_kV": 230.0 },
+            { "bus_number": 8, "base_kV": 230.0 },
+            { "bus_number": 9, "base_kV": 230.0 }
+        ]
+    },
+    
+    "generator_data": {
+        "_comment": "Generator data with MVA rating, scheduled power, voltage, and reactive power limits",
+        "_units": {
+            "MVA": "MVA",
+            "scheduled_active_power": "MW",
+            "scheduled_voltage": "pu (per unit)",
+            "max_reactive_power": "MVAr",
+            "min_reactive_power": "MVAr"
+        },
+        "generators": [
+            {
+                "bus_number": 1,
+                "MVA": 100,
+                "scheduled_active_power_MW": 71.6448,
+                "scheduled_voltage_pu": 1.04,
+                "max_reactive_power_MVAr": 9999.99,
+                "min_reactive_power_MVAr": -9999.99
+            },
+            {
+                "bus_number": 2,
+                "MVA": 100,
+                "scheduled_active_power_MW": 163.00,
+                "scheduled_voltage_pu": 1.025,
+                "max_reactive_power_MVAr": 9999.99,
+                "min_reactive_power_MVAr": -9999.99
+            },
+            {
+                "bus_number": 3,
+                "MVA": 100,
+                "scheduled_active_power_MW": 85.00,
+                "scheduled_voltage_pu": 1.025,
+                "max_reactive_power_MVAr": 9999.99,
+                "min_reactive_power_MVAr": -9999.99
+            }
+        ]
+    },
+
+    "transformer_data": {
+        "_comment": "Transformer data with impedance values in per unit",
+        "_units": {
+            "R": "pu",
+            "X": "pu",
+            "G": "pu",
+            "B": "pu"
+        },
+        "transformers": [
+            { "from_bus": 1, "to_bus": 4, "R_pu": 0.0, "X_pu": 0.0576, "G_pu": 0.0, "B_pu": 0.0 },
+            { "from_bus": 2, "to_bus": 7, "R_pu": 0.0, "X_pu": 0.0625, "G_pu": 0.0, "B_pu": 0.0 },
+            { "from_bus": 3, "to_bus": 9, "R_pu": 0.0, "X_pu": 0.0586, "G_pu": 0.0, "B_pu": 0.0 }
+        ]
+    },
+
+    "transmission_line_data": {
+        "_comment": "Transmission line data with impedance values in per unit",
+        "_units": {
+            "R": "pu",
+            "X": "pu",
+            "G": "pu",
+            "B": "pu"
+        },
+        "lines": [
+            { "from_bus": 4, "to_bus": 5, "R_pu": 0.010000, "X_pu": 0.085000, "G_pu": 0.0, "B_pu": 0.176000 },
+            { "from_bus": 4, "to_bus": 6, "R_pu": 0.017000, "X_pu": 0.092000, "G_pu": 0.0, "B_pu": 0.158000 },
+            { "from_bus": 5, "to_bus": 7, "R_pu": 0.032000, "X_pu": 0.161000, "G_pu": 0.0, "B_pu": 0.306000 },
+            { "from_bus": 6, "to_bus": 9, "R_pu": 0.039000, "X_pu": 0.170000, "G_pu": 0.0, "B_pu": 0.358000 },
+            { "from_bus": 7, "to_bus": 8, "R_pu": 0.008500, "X_pu": 0.072000, "G_pu": 0.0, "B_pu": 0.149000 },
+            { "from_bus": 8, "to_bus": 9, "R_pu": 0.011900, "X_pu": 0.100800, "G_pu": 0.0, "B_pu": 0.209000 }
+        ]
+    },
+
+    "load_data": {
+        "_comment": "Load data with active and reactive power demand",
+        "_units": {
+            "P": "MW",
+            "Q": "MVAr"
+        },
+        "loads": [
+            { "bus_number": 5, "load_type": "Constant PQ", "P_MW": 125.0000, "Q_MVAr": 50.0000 },
+            { "bus_number": 6, "load_type": "Constant PQ", "P_MW": 90.0000, "Q_MVAr": 30.0000 },
+            { "bus_number": 8, "load_type": "Constant PQ", "P_MW": 100.0000, "Q_MVAr": 35.0000 }
+        ]
+    }
+}

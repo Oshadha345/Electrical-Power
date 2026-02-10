@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Convergence & Staircase Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background: #f4f4f9; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; background: #eef2f3; padding: 15px; border-radius: 5px; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; }
+        select, input { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+        #status { margin-top: 10px; font-weight: bold; padding: 10px; border-radius: 4px; }
+        .converged { background: #d4edda; color: #155724; }
+        .diverged { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Non-Linear Convergence: The Staircase (Cobweb) Plot</h2>
+    <p>Watch how the initial guess interacts with the function's gradient. If the slope |g'(x)| > 1 at the root, it will <b>diverge</b>.</p>
+    
+    <div class="controls">
+        <div>
+            <label>Select Function (g(x)):</label>
+            <select id="funcSelect" onchange="updatePlot()">
+                <option value="quad">Quadratic: (x² + 2)/3 [Roots: 1, 2]</option>
+                <option value="cubic">Cubic: (x³ + 1)/3</option>
+                <option value="exp">Exponential: e^(-x)</option>
+                <option value="sin">Sinusoidal: 1 + 0.8*sin(x)</option>
+            </select>
+        </div>
+        <div>
+            <label>Initial Guess (x₀): <span id="guessVal">0.5</span></label>
+            <input type="range" id="guessSlider" min="-1" max="3" step="0.1" value="0.5" oninput="updatePlot()">
+        </div>
+    </div>
+
+    <div id="plot"></div>
+    <div id="status"></div>
+</div>
+
+<script>
+const configs = {
+    quad: { f: x => (x**2 + 2)/3, title: "g(x) = (x² + 2)/3", range: [-0.5, 3] },
+    cubic: { f: x => (x**3 + 1.2)/4, title: "g(x) = (x³ + 1.2)/4", range: [-1, 2.5] },
+    exp: { f: x => Math.exp(-x), title: "g(x) = e⁻ˣ", range: [-0.5, 2] },
+    sin: { f: x => 1 + 0.8 * Math.sin(x), title: "g(x) = 1 + 0.8·sin(x)", range: [-1, 3] }
+};
+
+function updatePlot() {
+    const type = document.getElementById('funcSelect').value;
+    const x0 = parseFloat(document.getElementById('guessSlider').value);
+    document.getElementById('guessVal').innerText = x0;
+    
+    const config = configs[type];
+    const g = config.f;
+    
+    // 1. Generate Function Curve & y=x line
+    let xCurve = [], yCurve = [], yLine = [];
+    for (let x = config.range[0]; x <= config.range[1]; x += 0.05) {
+        xCurve.push(x);
+        yCurve.push(g(x));
+        yLine.push(x);
+    }
+
+    // 2. Generate Iterations (Staircase)
+    let stepsX = [x0], stepsY = [0];
+    let currX = x0;
+    let converged = false;
+    let diverged = false;
+
+    for (let i = 0; i < 20; i++) {
+        let nextY = g(currX);
+        // Vertical step to curve
+        stepsX.push(currX, nextY);
+        stepsY.push(nextY, nextY);
+        
+        if (Math.abs(nextY - currX) < 0.001) { converged = true; break; }
+        if (Math.abs(nextY) > 10 || isNaN(nextY)) { diverged = true; break; }
+        currX = nextY;
+    }
+
+    const data = [
+        { x: xCurve, y: yCurve, name: 'g(x)', line: {color: '#2563eb'} },
+        { x: xCurve, y: yLine, name: 'y = x', line: {dash: 'dash', color: '#999'} },
+        { x: stepsX, y: stepsY, name: 'Path', line: {color: '#dc2626', width: 2}, mode: 'lines+markers' }
+    ];
+
+    const layout = {
+        title: config.title,
+        xaxis: { title: 'x_n', range: config.range },
+        yaxis: { title: 'x_n+1', range: config.range },
+        showlegend: false,
+        height: 500
+    };
+
+    Plotly.newPlot('plot', data, layout);
+
+    const status = document.getElementById('status');
+    if (converged) {
+        status.className = 'converged';
+        status.innerText = `Converged to root: ~${currX.toFixed(4)}`;
+    } else if (diverged) {
+        status.className = 'diverged';
+        status.innerText = "Diverged! The gradient is too steep or guess is too far.";
+    } else {
+        status.className = '';
+        status.innerText = "Iterating...";
+    }
+}
+
+updatePlot();
+</script>
+</body>
+</html>

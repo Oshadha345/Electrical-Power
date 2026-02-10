@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SOR Power Demonstration</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background: #1a1a1a; color: #eee; }
+        .container { max-width: 900px; margin: auto; background: #2d2d2d; padding: 25px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .controls { display: flex; flex-direction: column; gap: 15px; background: #3d3d3d; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid #00d4ff; }
+        .slider-row { display: flex; align-items: center; gap: 20px; }
+        input[type=range] { flex-grow: 1; accent-color: #00d4ff; }
+        .stat-display { font-size: 1.4rem; font-weight: bold; color: #00d4ff; display: flex; justify-content: space-between; }
+        .highlight { color: #ffca28; }
+        .math-box { font-family: 'Courier New', monospace; background: #111; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>SOR: Accelerating a "Stubborn" System</h2>
+    
+    <div class="math-box">
+        System: 10x + 9y = 19 <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9x + 10y = 19 <br>
+        Target: (1, 1)
+    </div>
+
+    <div class="controls">
+        <div class="slider-row">
+            <label>Acceleration Factor (α): <b id="alphaVal" class="highlight">1.00</b></label>
+            <input type="range" id="alphaSlider" min="0.5" max="1.95" step="0.01" value="1.0" oninput="update()">
+        </div>
+        <div class="stat-display">
+            <span>Iterations: <span id="stepCount" class="highlight">0</span></span>
+            <span>Status: <span id="status">Iterating...</span></span>
+        </div>
+    </div>
+
+    <div id="plot"></div>
+    
+    <p style="color: #bbb; font-size: 0.85rem;">
+        <b>Hint:</b> Try <b>α = 1.0</b> (Notice it takes 60+ steps). <br>
+        Then slide to <b>α = 1.45</b>. It should converge in less than 15 steps!
+    </p>
+</div>
+
+<script>
+function update() {
+    const alpha = parseFloat(document.getElementById('alphaSlider').value);
+    document.getElementById('alphaVal').innerText = alpha.toFixed(2);
+
+    let x = 0, y = 0; // Starting Guess at Origin
+    let pathX = [0], pathY = [0];
+    let steps = 0;
+    const tol = 0.0001;
+    const maxIter = 200;
+
+    for (let i = 0; i < maxIter; i++) {
+        let xOld = x;
+        let yOld = y;
+
+        // Eq 1: x = (19 - 9y)/10
+        let xTarget = (19 - 9 * y) / 10;
+        x = xOld + alpha * (xTarget - xOld); 
+        pathX.push(x); pathY.push(yOld); 
+
+        // Eq 2: y = (19 - 9x)/10
+        let yTarget = (19 - 9 * x) / 10;
+        y = yOld + alpha * (yTarget - yOld); 
+        pathX.push(x); pathY.push(y); 
+
+        steps++;
+        // Convergence check
+        if (Math.abs(x - xOld) < tol && Math.abs(y - yOld) < tol) {
+            document.getElementById('status').innerText = "CONVERGED";
+            document.getElementById('status').style.color = "#00ff88";
+            break;
+        }
+        if (i === maxIter - 1) {
+            document.getElementById('status').innerText = "FAILED/DIVERGED";
+            document.getElementById('status').style.color = "#ff4444";
+        }
+    }
+
+    document.getElementById('stepCount').innerText = steps;
+
+    // Line 1: 10x + 9y = 19 => y = (19 - 10x)/9
+    // Line 2: 9x + 10y = 19 => y = (19 - 9x)/10
+    const xRange = [0, 2];
+    const trace1 = { x: [0, 1.9], y: [2.11, 0], name: 'Eq 1', mode: 'lines', line: {color: '#555', width: 1} };
+    const trace2 = { x: [0, 2.11], y: [1.9, 0], name: 'Eq 2', mode: 'lines', line: {color: '#777', width: 1} };
+    
+    const pathTrace = {
+        x: pathX, y: pathY,
+        mode: 'lines+markers',
+        marker: { size: 4, color: '#00d4ff' },
+        line: { color: '#00d4ff', width: 2, shape: 'hv' },
+        name: 'Path'
+    };
+
+    const layout = {
+        paper_bgcolor: '#2d2d2d',
+        plot_bgcolor: '#1a1a1a',
+        font: { color: '#eee' },
+        xaxis: { title: 'X', range: [0, 1.5], gridcolor: '#333' },
+        yaxis: { title: 'Y', range: [0, 1.5], gridcolor: '#333' },
+        margin: { t: 20, b: 40, l: 50, r: 20 },
+        showlegend: false,
+        height: 500
+    };
+
+    Plotly.newPlot('plot', [trace1, trace2, pathTrace], layout);
+}
+
+update();
+</script>
+</body>
+</html>

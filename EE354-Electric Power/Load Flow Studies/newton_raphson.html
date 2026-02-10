@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Newton–Raphson Intuition Visualizer</title>
+  <style>
+    :root{
+      --bg:#f8fafc;
+      --panel:#ffffff;
+      --border:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --blue:#2563eb;
+      --blue-2:#1d4ed8;
+      --green:#22c55e;
+      --green-2:#15803d;
+      --orange:#f59e0b;
+      --red:#ef4444;
+      --purple:#7c3aed;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    header{
+      background:var(--panel);
+      border-bottom:1px solid var(--border);
+      padding:16px;
+    }
+    header h1{ margin:0 0 6px 0; font-size:20px; }
+    header p{ margin:0; color:var(--muted); font-size:13px; }
+
+    .layout{
+      display:flex;
+      height: calc(100vh - 74px);
+      overflow:hidden;
+    }
+    .sidebar{
+      width: 340px;
+      background:var(--panel);
+      border-right:1px solid var(--border);
+      padding:14px;
+      overflow:auto;
+    }
+    .main{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    canvas{
+      background:#fff;
+      border:1px solid #d1d5db;
+      border-radius:10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      max-width: 100%;
+      height: auto;
+    }
+
+    .section{ margin-bottom:14px; }
+    .section h3{
+      margin:0 0 8px 0;
+      font-size:14px;
+      color:#374151;
+    }
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+    .btn{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border-radius:8px;
+      border:1px solid transparent;
+      background:#f3f4f6;
+      cursor:pointer;
+      font-size:13px;
+      text-align:left;
+    }
+    .btn:hover{ background:#eef2ff; }
+    .btn.active{
+      background:#dbeafe;
+      border-color:#bfdbfe;
+      color:#1d4ed8;
+      font-weight:600;
+    }
+    .btn.fail.active{
+      background:#fee2e2;
+      border-color:#fecaca;
+      color:#991b1b;
+    }
+    .btn.fail:hover{ background:#fef2f2; }
+
+    .controlsRow{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .iconBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:44px;
+      height:40px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+    }
+    .iconBtn:disabled{
+      opacity:0.5;
+      cursor:not-allowed;
+    }
+    .primary{
+      flex:1;
+      height:40px;
+      border-radius:10px;
+      border:0;
+      background:var(--blue);
+      color:#fff;
+      font-weight:600;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    .primary:hover{ background:var(--blue-2); }
+
+    label{
+      display:block;
+      font-size:13px;
+      color:#374151;
+      margin-bottom:6px;
+      font-weight:600;
+    }
+    input[type="range"]{ width:100%; }
+    .card{
+      background:#f9fafb;
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:10px;
+    }
+    .stat{
+      display:flex;
+      justify-content:space-between;
+      font-size:13px;
+      padding:4px 0;
+    }
+    .stat span:first-child{ color:#374151; font-weight:600; }
+    .stat span:last-child{ color:#111827; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .settings{
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:10px;
+      background:#fff;
+    }
+    .toggleRow{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:13px;
+      padding:6px 0;
+    }
+    .small{ font-size:12px; color:var(--muted); font-weight:500; }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      border:1px solid var(--border);
+      background:#fff;
+      padding:1px 6px;
+      border-radius:6px;
+      font-size:12px;
+      color:#374151;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Newton–Raphson Intuition Visualizer</h1>
+    <p>Watch how successive tangent lines guide us to the root (self-contained: no React, no external deps).</p>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="section">
+        <h3>Select Function</h3>
+
+        <div class="hint">Single Variable (c = 0)</div>
+        <button class="btn" id="btn-quadratic" data-func="quadratic">x² − 2</button>
+        <button class="btn" id="btn-cubic" data-func="cubic">x³ − x − 2</button>
+        <button class="btn" id="btn-nonpoly" data-func="nonpoly">x² + sin(x) − 1</button>
+
+        <div class="hint" style="margin-top:10px;">Adjustable Target (c ≠ 0)</div>
+        <button class="btn" id="btn-adjustable" data-func="adjustable">x² + 3x + 1</button>
+
+        <div class="hint" style="margin-top:10px;">Failure Modes</div>
+        <button class="btn fail" id="btn-flat" data-func="flat">x³ (flat derivative)</button>
+        <button class="btn fail" id="btn-diverge" data-func="diverge">x² + 1 (no real root)</button>
+      </div>
+
+      <div class="section" id="targetSection" style="display:none;">
+        <label for="targetSlider">Target c = <span id="targetVal">0.00</span></label>
+        <input id="targetSlider" type="range" min="-3" max="3" step="0.1" value="0" />
+      </div>
+
+      <div class="section">
+        <label for="guessSlider">Initial Guess x₀ = <span id="guessVal">2.000</span></label>
+        <input id="guessSlider" type="range" min="-3" max="3" step="0.1" value="2" />
+        <div class="small" style="margin-top:6px;">Tip: use <span class="kbd">Space</span> to play/pause, <span class="kbd">R</span> to reset.</div>
+      </div>
+
+      <div class="section">
+        <div class="controlsRow">
+          <button class="primary" id="playBtn">Play</button>
+          <button class="iconBtn" id="stepBtn" title="Step" aria-label="Step">Step</button>
+          <button class="iconBtn" id="resetBtn" title="Reset" aria-label="Reset">Reset</button>
+          <button class="iconBtn" id="settingsBtn" title="Settings" aria-label="Settings">⚙</button>
+        </div>
+      </div>
+
+      <div class="section" id="settingsPanel" style="display:none;">
+        <div class="settings">
+          <div class="toggleRow">
+            <span>Show Tangent</span>
+            <input type="checkbox" id="showTangent" checked />
+          </div>
+          <div class="toggleRow">
+            <span>Show Error</span>
+            <input type="checkbox" id="showError" checked />
+          </div>
+          <div class="toggleRow">
+            <span>Auto Zoom</span>
+            <input type="checkbox" id="autoZoom" checked />
+          </div>
+          <div style="margin-top:10px;">
+            <label for="speedSlider">Speed: <span id="speedVal">1</span>x</label>
+            <input id="speedSlider" type="range" min="0.5" max="3" step="0.5" value="1" />
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="card">
+          <div class="stat"><span>Iteration</span><span id="iterStat">0</span></div>
+          <div class="stat"><span>Current x</span><span id="xStat">2.000000</span></div>
+          <div class="stat"><span>f(x)</span><span id="fxStat">0.000000</span></div>
+          <div class="stat"><span>Error</span><span id="errStat">0.000e+0</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <canvas id="cnv" width="900" height="650"></canvas>
+    </main>
+  </div>
+
+  <script>
+    // --- Model (no external deps) ---
+    const functions = {
+      quadratic: {
+        name: 'x² - 2',
+        f: (x) => x * x - 2,
+        df: (x) => 2 * x,
+        initial: 2,
+        target: 0,
+        xRange: [-3, 3],
+        yRange: [-3, 5]
+      },
+      cubic: {
+        name: 'x³ - x - 2',
+        f: (x) => x * x * x - x - 2,
+        df: (x) => 3 * x * x - 1,
+        initial: 2,
+        target: 0,
+        xRange: [-2, 3],
+        yRange: [-3, 5]
+      },
+      nonpoly: {
+        name: 'x² + sin(x) - 1',
+        f: (x) => x * x + Math.sin(x) - 1,
+        df: (x) => 2 * x + Math.cos(x),
+        initial: 1,
+        target: 0,
+        xRange: [-2, 2],
+        yRange: [-2, 3]
+      },
+      adjustable: {
+        name: 'x² + 3x + 1',
+        f: (x) => x * x + 3 * x + 1,
+        df: (x) => 2 * x + 3,
+        initial: 1,
+        target: 0,
+        xRange: [-5, 2],
+        yRange: [-3, 5]
+      },
+      flat: {
+        name: 'x³ (flat derivative)',
+        f: (x) => x * x * x,
+        df: (x) => 3 * x * x,
+        initial: 0.01,
+        target: 0,
+        xRange: [-2, 2],
+        yRange: [-2, 2]
+      },
+      diverge: {
+        name: 'x² + 1 (no real root)',
+        f: (x) => x * x + 1,
+        df: (x) => 2 * x,
+        initial: 0.5,
+        target: 0,
+        xRange: [-3, 3],
+        yRange: [-1, 5]
+      }
+    };
+
+    const state = {
+      selectedFunction: 'quadratic',
+      isPlaying: false,
+      iteration: 0,
+      currentX: functions.quadratic.initial,
+      initialGuess: functions.quadratic.initial,
+      targetC: functions.quadratic.target,
+      animationSpeed: 1,
+      showSettings: false,
+      showTangent: true,
+      showError: true,
+      autoZoom: true,
+      zoomLevel: 1,
+      history: [],
+      convergenceData: [],
+      phase: 'point', // point, tangent, intersection, move
+      phaseStart: performance.now(),
+      lastFrame: performance.now()
+    };
+
+    const phaseSequence = ['point', 'tangent', 'intersection', 'move'];
+    const baseDurationsMs = { point: 400, tangent: 600, intersection: 500, move: 500 };
+
+    // --- DOM ---
+    const cnv = document.getElementById('cnv');
+    const ctx = cnv.getContext('2d');
+
+    const playBtn = document.getElementById('playBtn');
+    const stepBtn = document.getElementById('stepBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsPanel = document.getElementById('settingsPanel');
+
+    const targetSection = document.getElementById('targetSection');
+    const targetSlider = document.getElementById('targetSlider');
+    const targetVal = document.getElementById('targetVal');
+
+    const guessSlider = document.getElementById('guessSlider');
+    const guessVal = document.getElementById('guessVal');
+
+    const showTangent = document.getElementById('showTangent');
+    const showError = document.getElementById('showError');
+    const autoZoom = document.getElementById('autoZoom');
+
+    const speedSlider = document.getElementById('speedSlider');
+    const speedVal = document.getElementById('speedVal');
+
+    const iterStat = document.getElementById('iterStat');
+    const xStat = document.getElementById('xStat');
+    const fxStat = document.getElementById('fxStat');
+    const errStat = document.getElementById('errStat');
+
+    function func() { return functions[state.selectedFunction]; }
+
+    function setSelectedFunction(key){
+      state.selectedFunction = key;
+      const f = func();
+      state.isPlaying = false;
+      state.iteration = 0;
+      state.history = [];
+      state.convergenceData = [];
+      state.phase = 'point';
+      state.phaseStart = performance.now();
+      state.zoomLevel = 1;
+
+      state.initialGuess = f.initial;
+      state.currentX = f.initial;
+      state.targetC = f.target;
+
+      // UI ranges
+      guessSlider.min = f.xRange[0];
+      guessSlider.max = f.xRange[1];
+      guessSlider.value = state.initialGuess;
+      guessVal.textContent = state.initialGuess.toFixed(3);
+
+      if (key === 'adjustable'){
+        targetSection.style.display = '';
+        targetSlider.value = state.targetC;
+        targetVal.textContent = state.targetC.toFixed(2);
+      } else {
+        targetSection.style.display = 'none';
+      }
+
+      updateActiveButtons();
+      updateStats();
+      updatePlayLabel();
+      draw(performance.now(), 0);
+    }
+
+    function updateActiveButtons(){
+      document.querySelectorAll('button[data-func]').forEach(btn => {
+        const k = btn.getAttribute('data-func');
+        btn.classList.toggle('active', k === state.selectedFunction);
+      });
+    }
+
+    function updatePlayLabel(){
+      playBtn.textContent = state.isPlaying ? 'Pause' : 'Play';
+      stepBtn.disabled = state.isPlaying;
+    }
+
+    function updateStats(){
+      const f = func();
+      const fx = f.f(state.currentX);
+      iterStat.textContent = String(state.iteration);
+      xStat.textContent = state.currentX.toFixed(6);
+      fxStat.textContent = fx.toFixed(6);
+      errStat.textContent = Math.abs(fx - state.targetC).toExponential(3);
+    }
+
+    function reset(){
+      const f = func();
+      state.isPlaying = false;
+      state.iteration = 0;
+      state.history = [];
+      state.convergenceData = [];
+      state.phase = 'point';
+      state.phaseStart = performance.now();
+      state.zoomLevel = 1;
+
+      state.currentX = state.initialGuess;
+      state.targetC = (state.selectedFunction === 'adjustable') ? parseFloat(targetSlider.value) : f.target;
+
+      updateStats();
+      updatePlayLabel();
+      draw(performance.now(), 0);
+    }
+
+    function performStep(){
+      const f = func();
+      const fx = f.f(state.currentX);
+      const dfx = f.df(state.currentX);
+
+      if (Math.abs(dfx) < 1e-10){
+        alert('Derivative too small! Method fails here.');
+        state.isPlaying = false;
+        updatePlayLabel();
+        return;
+      }
+
+      const nextX = state.currentX - (fx - state.targetC) / dfx;
+
+      if (!Number.isFinite(nextX) || Math.abs(nextX) > 100){
+        alert('Method is diverging!');
+        state.isPlaying = false;
+        updatePlayLabel();
+        return;
+      }
+
+      state.history.push({ x: state.currentX, nextX });
+      state.convergenceData.push(Math.abs(fx - state.targetC));
+
+      state.currentX = nextX;
+      state.iteration += 1;
+
+      // stop if converged at the NEW x
+      const newErr = Math.abs(f.f(state.currentX) - state.targetC);
+      if (newErr < 1e-6){
+        state.isPlaying = false;
+      }
+
+      updateStats();
+      updatePlayLabel();
+    }
+
+    // ADD: helper to compute tangent x-intercept (Newton update)
+    function getTangentInterceptX(){
+      const f = func();
+      const x = state.currentX;
+      const fx = f.f(x);
+      const dfx = f.df(x);
+
+      // Avoid NaN/Inf when derivative is tiny
+      if (!Number.isFinite(dfx) || Math.abs(dfx) < 1e-10) return null;
+
+      const xInt = x - (fx - state.targetC) / dfx;
+      if (!Number.isFinite(xInt)) return null;
+
+      return xInt;
+    }
+
+    function draw(now, phaseProgress01){
+      const f = func();
+      const width = cnv.width;
+      const height = cnv.height;
+
+      // adaptive zoom
+      let effectiveZoom = state.zoomLevel;
+      if (state.autoZoom && state.iteration > 0){
+        const errMag = Math.abs(f.f(state.currentX) - state.targetC);
+        effectiveZoom = Math.min(5, 1 + Math.log10(1 + 1 / (errMag + 0.01)));
+      }
+
+      // CHANGE: center zoom on tangent/x-intercept (intersection with y = targetC)
+      const baseXSpan = (f.xRange[1] - f.xRange[0]) / effectiveZoom;
+      const baseYSpan = (f.yRange[1] - f.yRange[0]) / effectiveZoom;
+
+      const interceptX = getTangentInterceptX();
+      const centerX = (state.autoZoom && interceptX !== null) ? interceptX : 0;
+      const centerY = 0; // x-axis is y=0; keep vertical center fixed
+
+      const xRange = [centerX - baseXSpan / 2, centerX + baseXSpan / 2];
+      const yRange = [centerY - baseYSpan / 2, centerY + baseYSpan / 2];
+
+      const xToCanvas = (x) => ((x - xRange[0]) / (xRange[1] - xRange[0])) * width;
+      const yToCanvas = (y) => height - ((y - yRange[0]) / (yRange[1] - yRange[0])) * height;
+
+      // clear
+      ctx.fillStyle = '#fafafa';
+      ctx.fillRect(0, 0, width, height);
+
+      // grid
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      for (let i = Math.floor(xRange[0]); i <= Math.ceil(xRange[1]); i++){
+        ctx.beginPath();
+        ctx.moveTo(xToCanvas(i), 0);
+        ctx.lineTo(xToCanvas(i), height);
+        ctx.stroke();
+      }
+      for (let i = Math.floor(yRange[0]); i <= Math.ceil(yRange[1]); i++){
+        ctx.beginPath();
+        ctx.moveTo(0, yToCanvas(i));
+        ctx.lineTo(width, yToCanvas(i));
+        ctx.stroke();
+      }
+
+      // axes
+      ctx.strokeStyle = '#6b7280';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, yToCanvas(0));
+      ctx.lineTo(width, yToCanvas(0));
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(xToCanvas(0), 0);
+      ctx.lineTo(xToCanvas(0), height);
+      ctx.stroke();
+
+      // target line (c != 0)
+      if (state.targetC !== 0){
+        ctx.strokeStyle = '#7c3aed';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([6, 6]);
+        ctx.beginPath();
+        ctx.moveTo(0, yToCanvas(state.targetC));
+        ctx.lineTo(width, yToCanvas(state.targetC));
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // curve
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      let started = false;
+      for (let px = 0; px <= width; px += 2){
+        const x = xRange[0] + (px / width) * (xRange[1] - xRange[0]);
+        const y = f.f(x);
+        if (y >= yRange[0] && y <= yRange[1]){
+          if (!started){
+            ctx.moveTo(px, yToCanvas(y));
+            started = true;
+          } else {
+            ctx.lineTo(px, yToCanvas(y));
+          }
+        }
+      }
+      ctx.stroke();
+
+      // history (faded)
+      for (let idx = 0; idx < state.history.length; idx++){
+        const p = state.history[idx];
+        const alpha = 0.15 + (idx / Math.max(1, state.history.length)) * 0.2;
+
+        ctx.fillStyle = `rgba(34, 197, 94, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(xToCanvas(p.x), yToCanvas(f.f(p.x)), 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (state.showTangent && p.nextX !== undefined){
+          ctx.strokeStyle = `rgba(245, 158, 11, ${alpha})`;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          const slope = f.df(p.x);
+          const x1 = p.x - 1;
+          const x2 = p.x + 1;
+          const y1 = f.f(p.x) + slope * (x1 - p.x);
+          const y2 = f.f(p.x) + slope * (x2 - p.x);
+          ctx.moveTo(xToCanvas(x1), yToCanvas(y1));
+          ctx.lineTo(xToCanvas(x2), yToCanvas(y2));
+          ctx.stroke();
+        }
+      }
+
+      // current iteration visuals
+      const fx = f.f(state.currentX);
+      const dfx = f.df(state.currentX);
+
+      // point highlight
+      const pulse = (state.phase === 'point') ? (1 + 0.3 * Math.sin(now / 200)) : 1;
+      ctx.fillStyle = '#22c55e';
+      ctx.beginPath();
+      ctx.arc(xToCanvas(state.currentX), yToCanvas(fx), 6 * pulse, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = '#15803d';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(xToCanvas(state.currentX), yToCanvas(fx), 8 * pulse, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // tangent
+      if ((state.phase === 'tangent' || state.phase === 'intersection' || state.phase === 'move') && state.showTangent){
+        const tProg = (state.phase === 'tangent') ? phaseProgress01 : 1;
+        const extension = 1.5 * tProg;
+
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        const x1 = state.currentX - extension;
+        const x2 = state.currentX + extension;
+        const y1 = fx + dfx * (x1 - state.currentX);
+        const y2 = fx + dfx * (x2 - state.currentX);
+        ctx.moveTo(xToCanvas(x1), yToCanvas(y1));
+        ctx.lineTo(xToCanvas(x2), yToCanvas(y2));
+        ctx.stroke();
+      }
+
+      // intersection & move
+      if (state.phase === 'intersection' || state.phase === 'move'){
+        const nextX = state.currentX - (fx - state.targetC) / dfx;
+        const iProg = (state.phase === 'intersection') ? phaseProgress01 : 1;
+
+        // drop line
+        ctx.strokeStyle = `rgba(239, 68, 68, ${iProg})`;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([6, 6]);
+        ctx.beginPath();
+        ctx.moveTo(xToCanvas(nextX), yToCanvas(state.targetC));
+        const yFrom = yToCanvas(state.targetC);
+        const yTo = yToCanvas(fx);
+        ctx.lineTo(xToCanvas(nextX), yFrom + (yTo - yFrom) * (1 - iProg));
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // intersection point
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath();
+        ctx.arc(xToCanvas(nextX), yToCanvas(state.targetC), 5 * iProg, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (state.phase === 'move'){
+          const moveX = state.currentX + (nextX - state.currentX) * phaseProgress01;
+
+          ctx.fillStyle = '#f97316';
+          ctx.beginPath();
+          ctx.arc(xToCanvas(moveX), yToCanvas(state.targetC), 7, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.strokeStyle = 'rgba(249, 115, 22, 0.3)';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(xToCanvas(state.currentX), yToCanvas(state.targetC));
+          ctx.lineTo(xToCanvas(moveX), yToCanvas(state.targetC));
+          ctx.stroke();
+        }
+      }
+
+      // error vector + label
+      if (state.showError && state.iteration > 0){
+        ctx.strokeStyle = 'rgba(124, 58, 237, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(xToCanvas(state.currentX), yToCanvas(state.targetC));
+        ctx.lineTo(xToCanvas(state.currentX), yToCanvas(fx));
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(124, 58, 237, 0.85)';
+        ctx.font = '12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+        ctx.fillText(`|f(x)-c| = ${Math.abs(fx - state.targetC).toExponential(2)}`, 12, 18);
+      }
+    }
+
+    function advancePhase(){
+      const idx = phaseSequence.indexOf(state.phase);
+      const nextIdx = (idx + 1) % phaseSequence.length;
+      state.phase = phaseSequence[nextIdx];
+      state.phaseStart = performance.now();
+
+      // completing a full cycle => do Newton step
+      if (state.phase === 'point'){
+        performStep();
+      }
+    }
+
+    function tick(now){
+      const speed = state.animationSpeed;
+      const phase = state.phase;
+      const duration = (baseDurationsMs[phase] || 500) / speed;
+      const t = now - state.phaseStart;
+      const prog = Math.max(0, Math.min(1, t / duration));
+
+      if (state.isPlaying){
+        if (t >= duration){
+          advancePhase();
+        }
+      }
+
+      draw(now, prog);
+      state.lastFrame = now;
+      requestAnimationFrame(tick);
+    }
+
+    // --- Wire up UI ---
+    document.querySelectorAll('button[data-func]').forEach(btn => {
+      btn.addEventListener('click', () => setSelectedFunction(btn.getAttribute('data-func')));
+    });
+
+    playBtn.addEventListener('click', () => {
+      state.isPlaying = !state.isPlaying;
+      state.phaseStart = performance.now();
+      updatePlayLabel();
+    });
+
+    stepBtn.addEventListener('click', () => {
+      // one iteration without phase animation
+      performStep();
+      state.phase = 'point';
+      state.phaseStart = performance.now();
+      draw(performance.now(), 0);
+    });
+
+    resetBtn.addEventListener('click', reset);
+
+    settingsBtn.addEventListener('click', () => {
+      state.showSettings = !state.showSettings;
+      settingsPanel.style.display = state.showSettings ? '' : 'none';
+    });
+
+    showTangent.addEventListener('change', () => state.showTangent = showTangent.checked);
+    showError.addEventListener('change', () => state.showError = showError.checked);
+    autoZoom.addEventListener('change', () => state.autoZoom = autoZoom.checked);
+
+    speedSlider.addEventListener('input', () => {
+      state.animationSpeed = parseFloat(speedSlider.value);
+      speedVal.textContent = String(state.animationSpeed);
+      state.phaseStart = performance.now();
+    });
+
+    targetSlider.addEventListener('input', () => {
+      state.targetC = parseFloat(targetSlider.value);
+      targetVal.textContent = state.targetC.toFixed(2);
+      reset();
+    });
+
+    guessSlider.addEventListener('input', () => {
+      const val = parseFloat(guessSlider.value);
+      state.initialGuess = val;
+      state.currentX = val;
+      state.iteration = 0;
+      state.history = [];
+      state.convergenceData = [];
+      state.phase = 'point';
+      state.phaseStart = performance.now();
+      guessVal.textContent = val.toFixed(3);
+      updateStats();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space'){
+        e.preventDefault();
+        state.isPlaying = !state.isPlaying;
+        state.phaseStart = performance.now();
+        updatePlayLabel();
+      } else if (e.key.toLowerCase() === 'r'){
+        reset();
+      }
+    });
+
+    // --- init ---
+    setSelectedFunction('quadratic');
+    speedVal.textContent = String(state.animationSpeed);
+    requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
