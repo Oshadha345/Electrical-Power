@@ -1,133 +1,135 @@
 \section{Task 2: Verification and Comparison}
 \label{sec:task2}
 
-\subsection{Comparison Objective}
-This section compares the custom NR solver outputs against PSSE results obtained using:
+\subsection{Scope of Verification}
+Task 2 verifies the custom NR program against PSSE outputs and compares:
 \begin{itemize}
-  \item Full Newton-Raphson,
-  \item Gauss-Seidel,
-  \item Fast Decoupled Load Flow.
+  \item numerical accuracy in bus \(|V|\) and angle,
+  \item convergence behavior of NR, GS, and FDLF,
+  \item likely reasons for observed differences.
 \end{itemize}
-The focus is on numerical accuracy, convergence behavior, and discussion of deviations \cite{stott1974fast,siemens_psse}.
+PSSE data were taken from the uploaded solver logs and bus report file (\texttt{PSSE data.md}, \texttt{Bus Based Report.pdf}).
 
-\subsection{Required Data to Insert}
-Populate this section after running PSSE using the same network and loading conditions used in Task 1.
+\subsection{Custom Program Recorded Outputs}
+From the custom Task-1 run:
+\begin{itemize}
+  \item converged in 4 iterations at \(10^{-4}\) p.u. tolerance,
+  \item total loss \(P_{loss}=4.641023\) MW and \(Q_{loss}=-92.160126\) MVAr,
+  \item bus-voltage profile shown in Table~\ref{tab:task2_bus_compare}.
+\end{itemize}
 
+\subsection{Bus Voltage and Angle Comparison}
 \begin{table}[H]
   \centering
-  \caption{Bus voltage magnitude comparison (custom NR vs PSSE methods).}
-  \label{tab:task2_vm_compare}
-  \begin{tabular}{ccccc}
+  \caption{Bus-wise comparison between custom NR and PSSE bus report values.}
+  \label{tab:task2_bus_compare}
+  \scriptsize
+  \begin{tabular}{crrrrrr}
     \toprule
-    Bus & Custom NR & PSSE NR & PSSE GS & PSSE FDLF \\
+    Bus & Custom \(|V|\) & PSSE \(|V|\) & \(|\Delta V|\) & \(|\Delta V|\%\) & Custom \(\theta\) & PSSE \(\theta\) \\
     \midrule
-    1 &  &  &  &  \\
-    2 &  &  &  &  \\
-    3 &  &  &  &  \\
-    4 &  &  &  &  \\
-    5 &  &  &  &  \\
-    6 &  &  &  &  \\
-    7 &  &  &  &  \\
-    8 &  &  &  &  \\
-    9 &  &  &  &  \\
+    1 & 1.040000 & 1.0400 & 0.000000 & 0.000000 & 0.000000 & 0.0 \\
+    2 & 1.025000 & 1.0250 & 0.000000 & 0.000000 & 9.280008 & 9.3 \\
+    3 & 1.025000 & 1.0250 & 0.000000 & 0.000000 & 4.664753 & 4.7 \\
+    4 & 1.025788 & 1.0258 & 0.000012 & 0.001130 & -2.216787 & -2.2 \\
+    5 & 0.995631 & 0.9956 & 0.000031 & 0.003103 & -3.988804 & -4.0 \\
+    6 & 1.012654 & 1.0127 & 0.000046 & 0.004508 & -3.687395 & -3.7 \\
+    7 & 1.025769 & 1.0257 & 0.000069 & 0.006766 & 3.719704 & 3.7 \\
+    8 & 1.015883 & 1.0159 & 0.000017 & 0.001712 & 0.727538 & 0.7 \\
+    9 & 1.032353 & 1.0323 & 0.000053 & 0.005131 & 1.966718 & 2.0 \\
     \bottomrule
   \end{tabular}
+  \normalsize
 \end{table}
 
 \begin{table}[H]
   \centering
-  \caption{Bus angle comparison (degrees).}
-  \label{tab:task2_angle_compare}
-  \begin{tabular}{ccccc}
+  \caption{Numerical-accuracy summary (custom NR vs PSSE).}
+  \label{tab:task2_accuracy}
+  \begin{tabular}{lc}
     \toprule
-    Bus & Custom NR & PSSE NR & PSSE GS & PSSE FDLF \\
+    Metric & Value \\
     \midrule
-    1 &  &  &  &  \\
-    2 &  &  &  &  \\
-    3 &  &  &  &  \\
-    4 &  &  &  &  \\
-    5 &  &  &  &  \\
-    6 &  &  &  &  \\
-    7 &  &  &  &  \\
-    8 &  &  &  &  \\
-    9 &  &  &  &  \\
+    MAE Voltage & 0.000025 p.u. \\
+    RMSE Voltage & 0.000035 p.u. \\
+    Max Voltage Error & 0.000069 p.u. \\
+    MAE Angle & 0.019594 deg \\
+    RMSE Angle & 0.022267 deg \\
+    Max Angle Error & 0.035247 deg \\
     \bottomrule
   \end{tabular}
 \end{table}
 
+\subsection{Convergence Characteristics}
 \begin{table}[H]
   \centering
-  \caption{Convergence and loss comparison across methods.}
+  \caption{Convergence comparison using custom and PSSE solver outputs.}
   \label{tab:task2_conv_compare}
-  \begin{tabular}{lccc}
+  \begin{tabular}{lcccc}
     \toprule
-    Method & Iterations & Total $P_{loss}$ (MW) & Notes \\
+    Method & Iterations & Largest mismatch (MVA) & System abs mismatch (MVA) & Stability \\
     \midrule
-    Custom NR &  &  &  \\
-    PSSE NR &  &  &  \\
-    PSSE GS &  &  &  \\
-    PSSE FDLF &  &  &  \\
+    Custom NR & 4 & 0.000034 & -- & Converged \\
+    PSSE NR & 3 & 0.00 & 0.00 & Converged \\
+    PSSE FDLF & 3 & 0.02 & 0.04 & Converged \\
+    PSSE GS & 18 & 0.20 & 0.85 & Converged (slow) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsection{Figure Placeholders (to be filled after PSSE runs)}
+\begin{table}[H]
+  \centering
+  \caption{Loss comparison (available from uploaded outputs).}
+  \label{tab:task2_loss}
+  \begin{tabular}{lcc}
+    \toprule
+    Method & Total \(P_{loss}\) (MW) & Note \\
+    \midrule
+    Custom NR & 4.641023 & From program branch-flow summation \\
+    PSSE bus report & 4.6 (approx.) & From rounded branch MW values in uploaded report \\
+    PSSE GS / FDLF & -- & \textit{TODO: export method-specific branch report if strict per-method loss is required} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-% TODO FIGURE 1 (Required):
-% Export a line or bar plot for bus voltage magnitudes (Bus 1-9) with four traces:
-% (a) Custom NR (from notebook final_bus_df: |V| column),
-% (b) PSSE Full NR,
-% (c) PSSE Gauss-Seidel,
-% (d) PSSE Fast Decoupled.
-% Suggested file name: Figures/task2_voltage_magnitude_comparison.pdf
+\subsection{Task 2 Plots}
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\linewidth}{\centering Placeholder for Figure 1:\\Voltage magnitude comparison across four methods.}}
-  \caption{Bus voltage magnitude comparison: custom solver and PSSE methods.}
-  \label{fig:task2_vm}
+  \includegraphics[width=\linewidth]{\detokenize{Figures/task2_voltage_magnitude_and_voltage_angle_comparison.png}}
+  \caption{Voltage magnitude and angle comparison plot (custom vs PSSE).}
+  \label{fig:task2_vm_angle}
 \end{figure}
 
-% TODO FIGURE 2 (Required):
-% Export a line or bar plot for bus voltage angles (deg, Bus 1-9) with the same four traces.
-% Suggested file name: Figures/task2_voltage_angle_comparison.pdf
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\linewidth}{\centering Placeholder for Figure 2:\\Voltage angle comparison across four methods.}}
-  \caption{Bus voltage angle comparison: custom solver and PSSE methods.}
-  \label{fig:task2_angle}
+  \includegraphics[width=\linewidth]{\detokenize{Figures/task2_convergence_characteristics.png}}
+  \caption{Convergence characteristics: iteration count and mismatch level by method.}
+  \label{fig:task2_conv_plot}
 \end{figure}
 
-% TODO FIGURE 3 (Required):
-% Create a bar chart of iteration counts by method:
-% Custom NR, PSSE NR, PSSE GS, PSSE FDLF.
-% Suggested file name: Figures/task2_iterations_comparison.pdf
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\linewidth}{\centering Placeholder for Figure 3:\\Iteration-count comparison for convergence behavior.}}
-  \caption{Convergence comparison using iteration counts.}
-  \label{fig:task2_iter}
+  \includegraphics[width=\linewidth]{\detokenize{Figures/task2_error_profile.png}}
+  \caption{Voltage and angle absolute error profiles across buses.}
+  \label{fig:task2_error_plot}
 \end{figure}
 
-% TODO FIGURE 4 (Recommended):
-% Build an absolute error plot for |V| and angle relative to PSSE NR benchmark:
-% Error(|V|) = |V_custom - V_PSSE_NR|,
-% Error(theta) = |theta_custom - theta_PSSE_NR|.
-% Suggested file name: Figures/task2_error_profile.pdf
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{0.9\linewidth}{\centering Placeholder for Figure 4:\\Absolute error profile against PSSE NR baseline.}}
-  \caption{Absolute voltage and angle deviations relative to PSSE NR.}
-  \label{fig:task2_error}
-\end{figure}
+\subsection{Discussion of Deviations}
+The bus-voltage differences between custom NR and PSSE are very small (maximum \(|\Delta V|=6.9\times10^{-5}\) p.u.), and angle differences remain below \(0.04^\circ\). This indicates that the custom Jacobian implementation and mismatch formulation are numerically consistent with established NR practice \cite{tinney1967powerflow,grainger1994power}.
 
-\subsection{Discussion Template}
-Discuss the following points using your own PSSE data:
+Convergence behavior follows expected algorithm characteristics \cite{stott1974fast,saadat1999power}:
 \begin{itemize}
-  \item Agreement between custom NR and PSSE NR for both $|V|$ and angle.
-  \item Iteration trends: expected faster convergence of NR and FDLF compared with GS.
-  \item Numerical differences due to model assumptions (tap details, tolerances, initialization, and stopping criteria).
-  \item Practical interpretation: trade-off between computational speed and numerical robustness.
+  \item NR and FDLF converged quickly (3--4 iterations),
+  \item GS converged but required many more updates (18 iterations),
+  \item NR reached the strongest mismatch reduction per iteration.
 \end{itemize}
 
-Use this section to write a technical paragraph-based comparison in your own words to satisfy submission originality requirements.
+The residual differences come mainly from:
+\begin{itemize}
+  \item printed rounding in PSSE bus report values (4 decimal place display),
+  \item solver stop criteria and internal scaling differences,
+  \item floating-point linear-solve details between implementations.
+\end{itemize}
+
+These observations agree with standard load-flow references and practical tool behavior in commercial packages \cite{saadat1999power,siemens_psse}.
 

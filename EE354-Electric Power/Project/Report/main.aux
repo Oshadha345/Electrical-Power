@@ -4,65 +4,104 @@
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{tinney1967powerflow}
 \citation{grainger1994power}
+\citation{saadat1999power}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Task 1: Program Development}{2}{section.1}\protected@file@percent }
 \newlabel{sec:task1}{{I}{2}{Task 1: Program Development}{section.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-A}}Objective and Scope}{2}{subsection.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-B}}Mathematical Formulation}{2}{subsection.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-C}}Program Workflow}{2}{subsection.1.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Task 1 Newton-Raphson program flowchart.}}{2}{figure.caption.2}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:task1_flowchart}{{1}{2}{Task 1 Newton-Raphson program flowchart}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-A}}Objective}{2}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-B}}Input Data Approach}{2}{subsection.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Input dataset summary (from \texttt  {IEEE9\_Bus\_system\_data.json}).}}{2}{table.1}\protected@file@percent }
+\newlabel{tab:task1_input_summary}{{I}{2}{Input dataset summary (from \texttt {IEEE9\_Bus\_system\_data.json})}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-C}}Mathematical Formulation}{2}{subsection.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-D}}Program Flowcharts with Line References}{3}{subsection.1.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overall project workflow used to organize Tasks 1--3.}}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:project_flow}{{1}{3}{Overall project workflow used to organize Tasks 1--3}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Task 1 source-code flowchart linked to \texttt  {E21345\_LoadFlow.py} line ranges.}}{3}{figure.2}\protected@file@percent }
+\newlabel{fig:task1_code_flow}{{2}{3}{Task 1 source-code flowchart linked to \texttt {E21345\_LoadFlow.py} line ranges}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Newton-Raphson internal function flowchart (mismatch, Jacobian, correction loop).}}{4}{figure.3}\protected@file@percent }
+\newlabel{fig:task1_nr_flow}{{3}{4}{Newton-Raphson internal function flowchart (mismatch, Jacobian, correction loop)}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-E}}Y-bus Matrix from Code}{4}{subsection.1.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Real part of \(Y_{bus}\) (p.u.).}}{4}{table.2}\protected@file@percent }
+\newlabel{tab:ybus_real}{{II}{4}{Real part of \(Y_{bus}\) (p.u.)}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Imaginary part of \(Y_{bus}\) (p.u.).}}{5}{table.3}\protected@file@percent }
+\newlabel{tab:ybus_imag}{{III}{5}{Imaginary part of \(Y_{bus}\) (p.u.)}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-F}}Convergence and Sample Iteration Output}{5}{subsection.1.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Task 1 convergence summary for IEEE 9-bus base case.}}{5}{table.4}\protected@file@percent }
+\newlabel{tab:task1_conv}{{IV}{5}{Task 1 convergence summary for IEEE 9-bus base case}{table.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Second-iteration bus snapshot (assignment deliverable).}}{5}{table.5}\protected@file@percent }
+\newlabel{tab:task1_iter2}{{V}{5}{Second-iteration bus snapshot (assignment deliverable)}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Final bus voltage profile from custom NR solver.}}{5}{table.6}\protected@file@percent }
+\newlabel{tab:task1_finalV}{{VI}{5}{Final bus voltage profile from custom NR solver}{table.6}{}}
 \citation{tinney1967powerflow}
-\citation{bergen2000power}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-D}}Base-Case Output Summary (Own Run)}{3}{subsection.1.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Task 1 convergence summary for IEEE 9-bus base case.}}{3}{table.caption.3}\protected@file@percent }
-\newlabel{tab:task1_conv}{{I}{3}{Task 1 convergence summary for IEEE 9-bus base case}{table.caption.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Second-iteration snapshot (copy values from notebook table).}}{3}{table.caption.4}\protected@file@percent }
-\newlabel{tab:task1_iter2}{{II}{3}{Second-iteration snapshot (copy values from notebook table)}{table.caption.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Final bus voltage profile from custom NR solver.}}{3}{table.caption.5}\protected@file@percent }
-\newlabel{tab:task1_finalV}{{III}{3}{Final bus voltage profile from custom NR solver}{table.caption.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-E}}Technical Discussion}{3}{subsection.1.5}\protected@file@percent }
+\citation{saadat1999power}
+\citation{chapman2011electric}
+\@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Line/transformer power flows and branch losses from custom NR run.}}{6}{table.7}\protected@file@percent }
+\newlabel{tab:task1_flows}{{VII}{6}{Line/transformer power flows and branch losses from custom NR run}{table.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-G}}Execution Proof Requirement}{6}{subsection.1.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-H}}Task 1 Discussion}{6}{subsection.1.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {II}Task 2: Verification and Comparison}{6}{section.2}\protected@file@percent }
+\newlabel{sec:task2}{{II}{6}{Task 2: Verification and Comparison}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Scope of Verification}{6}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Custom Program Recorded Outputs}{6}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Bus Voltage and Angle Comparison}{7}{subsection.2.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {VIII}{\ignorespaces Bus-wise comparison between custom NR and PSSE bus report values.}}{7}{table.8}\protected@file@percent }
+\newlabel{tab:task2_bus_compare}{{VIII}{7}{Bus-wise comparison between custom NR and PSSE bus report values}{table.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {IX}{\ignorespaces Numerical-accuracy summary (custom NR vs PSSE).}}{7}{table.9}\protected@file@percent }
+\newlabel{tab:task2_accuracy}{{IX}{7}{Numerical-accuracy summary (custom NR vs PSSE)}{table.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Convergence Characteristics}{7}{subsection.2.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {X}{\ignorespaces Convergence comparison using custom and PSSE solver outputs.}}{7}{table.10}\protected@file@percent }
+\newlabel{tab:task2_conv_compare}{{X}{7}{Convergence comparison using custom and PSSE solver outputs}{table.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XI}{\ignorespaces Loss comparison (available from uploaded outputs).}}{7}{table.11}\protected@file@percent }
+\newlabel{tab:task2_loss}{{XI}{7}{Loss comparison (available from uploaded outputs)}{table.11}{}}
+\citation{tinney1967powerflow}
+\citation{grainger1994power}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-E}}Task 2 Plots}{8}{subsection.2.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Voltage magnitude and angle comparison plot (custom vs PSSE).}}{8}{figure.4}\protected@file@percent }
+\newlabel{fig:task2_vm_angle}{{4}{8}{Voltage magnitude and angle comparison plot (custom vs PSSE)}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Convergence characteristics: iteration count and mismatch level by method.}}{8}{figure.5}\protected@file@percent }
+\newlabel{fig:task2_conv_plot}{{5}{8}{Convergence characteristics: iteration count and mismatch level by method}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Voltage and angle absolute error profiles across buses.}}{8}{figure.6}\protected@file@percent }
+\newlabel{fig:task2_error_plot}{{6}{8}{Voltage and angle absolute error profiles across buses}{figure.6}{}}
 \citation{stott1974fast}
+\citation{saadat1999power}
+\citation{saadat1999power}
 \citation{siemens_psse}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Task 2: Verification and Comparison}{4}{section.2}\protected@file@percent }
-\newlabel{sec:task2}{{II}{4}{Task 2: Verification and Comparison}{section.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Comparison Objective}{4}{subsection.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Required Data to Insert}{4}{subsection.2.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Bus voltage magnitude comparison (custom NR vs PSSE methods).}}{4}{table.caption.6}\protected@file@percent }
-\newlabel{tab:task2_vm_compare}{{IV}{4}{Bus voltage magnitude comparison (custom NR vs PSSE methods)}{table.caption.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Bus angle comparison (degrees).}}{4}{table.caption.7}\protected@file@percent }
-\newlabel{tab:task2_angle_compare}{{V}{4}{Bus angle comparison (degrees)}{table.caption.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Convergence and loss comparison across methods.}}{4}{table.caption.8}\protected@file@percent }
-\newlabel{tab:task2_conv_compare}{{VI}{4}{Convergence and loss comparison across methods}{table.caption.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Figure Placeholders (to be filled after PSSE runs)}{5}{subsection.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Bus voltage magnitude comparison: custom solver and PSSE methods.}}{5}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:task2_vm}{{2}{5}{Bus voltage magnitude comparison: custom solver and PSSE methods}{figure.caption.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Bus voltage angle comparison: custom solver and PSSE methods.}}{5}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:task2_angle}{{3}{5}{Bus voltage angle comparison: custom solver and PSSE methods}{figure.caption.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Convergence comparison using iteration counts.}}{5}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:task2_iter}{{4}{5}{Convergence comparison using iteration counts}{figure.caption.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Absolute voltage and angle deviations relative to PSSE NR.}}{5}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:task2_error}{{5}{5}{Absolute voltage and angle deviations relative to PSSE NR}{figure.caption.12}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Discussion Template}{5}{subsection.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {III}Task 3: Voltage Sensitivity Analysis}{5}{section.3}\protected@file@percent }
-\newlabel{sec:task3}{{III}{5}{Task 3: Voltage Sensitivity Analysis}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Method}{5}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Sensitivity Ranking from Executed Notebook}{6}{subsection.3.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {VII}{\ignorespaces Sensitivity ranking using voltage standard-deviation metrics.}}{6}{table.caption.13}\protected@file@percent }
-\newlabel{tab:task3_ranking}{{VII}{6}{Sensitivity ranking using voltage standard-deviation metrics}{table.caption.13}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Required Voltage-Variation Tables}{6}{subsection.3.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {VIII}{\ignorespaces Voltage magnitudes under independent load variations (Bus 5 target case).}}{6}{table.caption.14}\protected@file@percent }
-\newlabel{tab:task3_bus5}{{VIII}{6}{Voltage magnitudes under independent load variations (Bus 5 target case)}{table.caption.14}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {IX}{\ignorespaces Voltage magnitudes under independent load variations (Bus 6 target case).}}{6}{table.caption.15}\protected@file@percent }
-\newlabel{tab:task3_bus6}{{IX}{6}{Voltage magnitudes under independent load variations (Bus 6 target case)}{table.caption.15}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {X}{\ignorespaces Voltage magnitudes under independent load variations (Bus 8 target case).}}{6}{table.caption.16}\protected@file@percent }
-\newlabel{tab:task3_bus8}{{X}{6}{Voltage magnitudes under independent load variations (Bus 8 target case)}{table.caption.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Figure Placeholders}{6}{subsection.3.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Bus-voltage profiles for each target load bus under -10\%, 0\%, and +10\% load variation.}}{6}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:task3_profiles}{{6}{6}{Bus-voltage profiles for each target load bus under -10\%, 0\%, and +10\% load variation}{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Sensitivity ranking by RMS standard deviation index.}}{7}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:task3_rank}{{7}{7}{Sensitivity ranking by RMS standard deviation index}{figure.caption.18}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Discussion}{7}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-F}}Discussion of Deviations}{9}{subsection.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Task 3: Voltage Sensitivity Analysis}{9}{section.3}\protected@file@percent }
+\newlabel{sec:task3}{{III}{9}{Task 3: Voltage Sensitivity Analysis}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Method}{9}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Voltage Results Under Each Load Variation}{9}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {XII}{\ignorespaces Voltage magnitudes for target load bus 5 variation.}}{9}{table.12}\protected@file@percent }
+\newlabel{tab:task3_bus5}{{XII}{9}{Voltage magnitudes for target load bus 5 variation}{table.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XIII}{\ignorespaces Voltage magnitudes for target load bus 6 variation.}}{10}{table.13}\protected@file@percent }
+\newlabel{tab:task3_bus6}{{XIII}{10}{Voltage magnitudes for target load bus 6 variation}{table.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XIV}{\ignorespaces Voltage magnitudes for target load bus 8 variation.}}{10}{table.14}\protected@file@percent }
+\newlabel{tab:task3_bus8}{{XIV}{10}{Voltage magnitudes for target load bus 8 variation}{table.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Variance and Standard Deviation Tables}{10}{subsection.3.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {XV}{\ignorespaces Variance and standard deviation across buses for target load bus 5.}}{10}{table.15}\protected@file@percent }
+\newlabel{tab:task3_varstd5}{{XV}{10}{Variance and standard deviation across buses for target load bus 5}{table.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XVI}{\ignorespaces Variance and standard deviation across buses for target load bus 6.}}{10}{table.16}\protected@file@percent }
+\newlabel{tab:task3_varstd6}{{XVI}{10}{Variance and standard deviation across buses for target load bus 6}{table.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XVII}{\ignorespaces Variance and standard deviation across buses for target load bus 8.}}{11}{table.17}\protected@file@percent }
+\newlabel{tab:task3_varstd8}{{XVII}{11}{Variance and standard deviation across buses for target load bus 8}{table.17}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {XVIII}{\ignorespaces Sensitivity ranking using aggregate voltage-spread indices.}}{11}{table.18}\protected@file@percent }
+\newlabel{tab:task3_ranking}{{XVIII}{11}{Sensitivity ranking using aggregate voltage-spread indices}{table.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Task 3 Figures}{11}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Voltage profile variation across buses for each target load perturbation.}}{11}{figure.7}\protected@file@percent }
+\newlabel{fig:task3_profiles}{{7}{11}{Voltage profile variation across buses for each target load perturbation}{figure.7}{}}
+\citation{saadat1999power}
+\citation{bergen2000power}
+\citation{chapman2011electric}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Sensitivity ranking based on RMS standard deviation.}}{12}{figure.8}\protected@file@percent }
+\newlabel{fig:task3_rank}{{8}{12}{Sensitivity ranking based on RMS standard deviation}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Discussion of Findings}{12}{subsection.3.5}\protected@file@percent }
 \bibstyle{IEEEtran}
 \bibdata{reference}
-\gdef \@abspage@last{7}
+\bibcite{tinney1967powerflow}{1}
+\bibcite{grainger1994power}{2}
+\bibcite{saadat1999power}{3}
+\bibcite{chapman2011electric}{4}
+\bibcite{stott1974fast}{5}
+\bibcite{siemens_psse}{6}
+\bibcite{bergen2000power}{7}
+\@writefile{toc}{\contentsline {section}{References}{13}{section*.2}\protected@file@percent }
+\gdef \@abspage@last{13}

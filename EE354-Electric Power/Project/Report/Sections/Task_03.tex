@@ -2,28 +2,141 @@
 \label{sec:task3}
 
 \subsection{Method}
-Each load bus was independently perturbed by scaling both active and reactive load by
+Each load bus (\(5,6,8\)) was perturbed independently by scaling both active and reactive demand with:
 \[
-\alpha \in \{-10\%, 0\%, +10\%\},
+\alpha \in \{-10\%,0\%,+10\%\},
 \]
-while keeping all other loads unchanged. For each case, the custom NR solver was executed and the bus-voltage magnitudes were recorded.
+while all other loads were kept fixed. For each case, the full NR solver was run and all bus-voltage magnitudes were recorded.
 
-For each target load bus, variance and standard deviation of voltage magnitudes were computed:
+For each target load bus, voltage spread was quantified using:
 \begin{align}
-\mathrm{Var}(V_b) &= \frac{1}{N}\sum_{m=1}^{N}(V_{b,m}-\bar{V}_b)^2, \\
+\mathrm{Var}(V_b) &= \frac{1}{N}\sum_{m=1}^{N}\left(V_{b,m}-\bar V_b\right)^2, \\
 \sigma(V_b) &= \sqrt{\mathrm{Var}(V_b)}.
 \end{align}
-An aggregate ranking index was used:
-\begin{equation}
-\mathrm{RMS\_STD} = \sqrt{\frac{1}{n_b}\sum_{b=1}^{n_b} \sigma(V_b)^2 }.
-\end{equation}
+To rank overall influence:
+\[
+\mathrm{RMS\_STD}_k = \sqrt{\frac{1}{n_b}\sum_{b=1}^{n_b}\sigma_b^2}.
+\]
 
-\subsection{Sensitivity Ranking from Executed Notebook}
-Table~\ref{tab:task3_ranking} reports the ranking metrics from the current notebook run.
+\subsection{Voltage Results Under Each Load Variation}
+\begin{table}[H]
+  \centering
+  \caption{Voltage magnitudes for target load bus 5 variation.}
+  \label{tab:task3_bus5}
+  \scriptsize
+  \begin{tabular}{crrrrrrrrrr}
+    \toprule
+    \(\Delta P,\Delta Q\) & \(V_1\) & \(V_2\) & \(V_3\) & \(V_4\) & \(V_5\) & \(V_6\) & \(V_7\) & \(V_8\) & \(V_9\) \\
+    \midrule
+    -10\% & 1.040000 & 1.025000 & 1.025000 & 1.027784 & 1.001712 & 1.014125 & 1.027257 & 1.017024 & 1.032976 \\
+    0\%   & 1.040000 & 1.025000 & 1.025000 & 1.025788 & 0.995631 & 1.012654 & 1.025769 & 1.015883 & 1.032353 \\
+    +10\% & 1.040000 & 1.025000 & 1.025000 & 1.023640 & 0.989300 & 1.011062 & 1.024214 & 1.014681 & 1.031688 \\
+    \bottomrule
+  \end{tabular}
+  \normalsize
+\end{table}
 
 \begin{table}[H]
   \centering
-  \caption{Sensitivity ranking using voltage standard-deviation metrics.}
+  \caption{Voltage magnitudes for target load bus 6 variation.}
+  \label{tab:task3_bus6}
+  \scriptsize
+  \begin{tabular}{crrrrrrrrrr}
+    \toprule
+    \(\Delta P,\Delta Q\) & \(V_1\) & \(V_2\) & \(V_3\) & \(V_4\) & \(V_5\) & \(V_6\) & \(V_7\) & \(V_8\) & \(V_9\) \\
+    \midrule
+    -10\% & 1.040000 & 1.025000 & 1.025000 & 1.026885 & 0.996397 & 1.016802 & 1.026146 & 1.016519 & 1.033273 \\
+    0\%   & 1.040000 & 1.025000 & 1.025000 & 1.025788 & 0.995631 & 1.012654 & 1.025769 & 1.015883 & 1.032353 \\
+    +10\% & 1.040000 & 1.025000 & 1.025000 & 1.024618 & 0.994804 & 1.008384 & 1.025370 & 1.015219 & 1.031402 \\
+    \bottomrule
+  \end{tabular}
+  \normalsize
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Voltage magnitudes for target load bus 8 variation.}
+  \label{tab:task3_bus8}
+  \scriptsize
+  \begin{tabular}{crrrrrrrrrr}
+    \toprule
+    \(\Delta P,\Delta Q\) & \(V_1\) & \(V_2\) & \(V_3\) & \(V_4\) & \(V_5\) & \(V_6\) & \(V_7\) & \(V_8\) & \(V_9\) \\
+    \midrule
+    -10\% & 1.040000 & 1.025000 & 1.025000 & 1.025382 & 0.995196 & 1.012385 & 1.026947 & 1.019141 & 1.033334 \\
+    0\%   & 1.040000 & 1.025000 & 1.025000 & 1.025788 & 0.995631 & 1.012654 & 1.025769 & 1.015883 & 1.032353 \\
+    +10\% & 1.040000 & 1.025000 & 1.025000 & 1.026100 & 0.995931 & 1.012799 & 1.024507 & 1.012510 & 1.031298 \\
+    \bottomrule
+  \end{tabular}
+  \normalsize
+\end{table}
+
+\subsection{Variance and Standard Deviation Tables}
+\begin{table}[H]
+  \centering
+  \caption{Variance and standard deviation across buses for target load bus 5.}
+  \label{tab:task3_varstd5}
+  \begin{tabular}{ccc}
+    \toprule
+    Observed Bus & Variance & Std Dev \\
+    \midrule
+    1 & 0.0000000000 & 0.0000000000 \\
+    2 & 0.0000000000 & 0.0000000000 \\
+    3 & 0.0000000000 & 0.0000000000 \\
+    4 & 0.0000028635 & 0.0016921912 \\
+    5 & 0.0000256833 & 0.0050678664 \\
+    6 & 0.0000015649 & 0.0012509498 \\
+    7 & 0.0000015438 & 0.0012424893 \\
+    8 & 0.0000009147 & 0.0009564155 \\
+    9 & 0.0000002765 & 0.0005257919 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Variance and standard deviation across buses for target load bus 6.}
+  \label{tab:task3_varstd6}
+  \begin{tabular}{ccc}
+    \toprule
+    Observed Bus & Variance & Std Dev \\
+    \midrule
+    1 & 0.0000000000 & 0.0000000000 \\
+    2 & 0.0000000000 & 0.0000000000 \\
+    3 & 0.0000000000 & 0.0000000000 \\
+    4 & 0.0000008571 & 0.0009257769 \\
+    5 & 0.0000004233 & 0.0006506190 \\
+    6 & 0.0000118106 & 0.0034366545 \\
+    7 & 0.0000001004 & 0.0003169338 \\
+    8 & 0.0000002819 & 0.0005308973 \\
+    9 & 0.0000005836 & 0.0007639111 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Variance and standard deviation across buses for target load bus 8.}
+  \label{tab:task3_varstd8}
+  \begin{tabular}{ccc}
+    \toprule
+    Observed Bus & Variance & Std Dev \\
+    \midrule
+    1 & 0.0000000000 & 0.0000000000 \\
+    2 & 0.0000000000 & 0.0000000000 \\
+    3 & 0.0000000000 & 0.0000000000 \\
+    4 & 0.0000000863 & 0.0002937266 \\
+    5 & 0.0000000911 & 0.0003017733 \\
+    6 & 0.0000000295 & 0.0001718018 \\
+    7 & 0.0000009928 & 0.0009963793 \\
+    8 & 0.0000073304 & 0.0027074721 \\
+    9 & 0.0000006908 & 0.0008311667 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Sensitivity ranking using aggregate voltage-spread indices.}
   \label{tab:task3_ranking}
   \begin{tabular}{cccc}
     \toprule
@@ -36,76 +149,31 @@ Table~\ref{tab:task3_ranking} reports the ranking metrics from the current noteb
   \end{tabular}
 \end{table}
 
-The highest influence on overall bus-voltage spread is observed for \textbf{load bus 5}.
-
-\subsection{Required Voltage-Variation Tables}
-\begin{table}[H]
-  \centering
-  \caption{Voltage magnitudes under independent load variations (Bus 5 target case).}
-  \label{tab:task3_bus5}
-  \begin{tabular}{cccc}
-    \toprule
-    Variation (\%) & Bus index & Voltage magnitude (p.u.) & Remarks \\
-    \midrule
-    -10 & 1--9 & Insert from notebook sensitivity table &  \\
-    0 & 1--9 & Insert from notebook sensitivity table &  \\
-    +10 & 1--9 & Insert from notebook sensitivity table &  \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\begin{table}[H]
-  \centering
-  \caption{Voltage magnitudes under independent load variations (Bus 6 target case).}
-  \label{tab:task3_bus6}
-  \begin{tabular}{cccc}
-    \toprule
-    Variation (\%) & Bus index & Voltage magnitude (p.u.) & Remarks \\
-    \midrule
-    -10 & 1--9 & Insert from notebook sensitivity table &  \\
-    0 & 1--9 & Insert from notebook sensitivity table &  \\
-    +10 & 1--9 & Insert from notebook sensitivity table &  \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\begin{table}[H]
-  \centering
-  \caption{Voltage magnitudes under independent load variations (Bus 8 target case).}
-  \label{tab:task3_bus8}
-  \begin{tabular}{cccc}
-    \toprule
-    Variation (\%) & Bus index & Voltage magnitude (p.u.) & Remarks \\
-    \midrule
-    -10 & 1--9 & Insert from notebook sensitivity table &  \\
-    0 & 1--9 & Insert from notebook sensitivity table &  \\
-    +10 & 1--9 & Insert from notebook sensitivity table &  \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\subsection{Figure Placeholders}
+\subsection{Task 3 Figures}
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\linewidth}{\centering Placeholder:\\Insert voltage profile plot generated in notebook cell ``Task-3: Bus Voltage Profiles under Independent Load Variations''.}}
-  \caption{Bus-voltage profiles for each target load bus under -10\%, 0\%, and +10\% load variation.}
+  \includegraphics[width=\linewidth]{\detokenize{Figures/task3_voltage_profiles.png}}
+  \caption{Voltage profile variation across buses for each target load perturbation.}
   \label{fig:task3_profiles}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\linewidth}{\centering Placeholder:\\Insert sensitivity ranking bar chart generated in notebook cell ``Task-3 Sensitivity Ranking''.}}
-  \caption{Sensitivity ranking by RMS standard deviation index.}
+  \includegraphics[width=0.8\linewidth]{\detokenize{Figures/task3_sensitivity_ranking.png}}
+  \caption{Sensitivity ranking based on RMS standard deviation.}
   \label{fig:task3_rank}
 \end{figure}
 
-\subsection{Discussion}
-The sensitivity analysis indicates that perturbations at bus 5 produce the largest voltage spread throughout the network. This result is consistent with the bus location relative to major power-transfer paths and local reactive demand. Buses 6 and 8 show lower system-wide influence for the same $\pm10\%$ perturbation range.
+\subsection{Discussion of Findings}
+The sensitivity ranking in Table~\ref{tab:task3_ranking} shows a clear order: bus 5 has the highest network-wide voltage influence, followed by bus 6, then bus 8. This ordering is physically reasonable for the given IEEE 9-bus topology and loading pattern. Bus 5 is connected to bus 4 and bus 7 paths that carry significant active and reactive transfers, so perturbing this load causes larger redistribution of currents and voltage drops in multiple corridors.
 
-For final submission, expand this section to a 2--3 page technical discussion that includes:
-\begin{itemize}
-  \item Why bus 5 is more influential from a network perspective.
-  \item How voltage profile changes vary by electrical distance.
-  \item Practical implications for voltage support and load management.
-\end{itemize}
+The variation tables indicate that generator buses 1--3 remain fixed at their voltage setpoints for all perturbations, which matches PV/slack bus modeling. Most sensitivity appears on PQ buses, especially near the disturbed load bus and along electrically close paths. For the bus-5 perturbation case, \(V_5\) has the largest spread (\(\sigma=0.005068\)), while nearby buses 4, 6, and 7 also show notable changes.
+
+For the bus-6 perturbation case, the largest spread occurs at \(V_6\), and the propagated effect on buses 4, 5, 8, and 9 is moderate. For the bus-8 perturbation case, \(V_8\) dominates the spread, but the global RMS impact is still smaller than the bus-5 case. This confirms that sensitivity is not only a function of local load size; it also depends on electrical coupling and reactive support paths.
+
+From a planning viewpoint, these results suggest that bus 5 is the most critical candidate for voltage-support actions under demand uncertainty (e.g., local reactive compensation, dynamic VAR support, or tighter operational monitoring). In contrast, bus-8 variations are relatively better contained and less disruptive to the whole system.
+
+The trend is aligned with common load-flow interpretation in standard references: voltage sensitivity rises with stronger network coupling and weaker local reactive margin \cite{saadat1999power,bergen2000power,chapman2011electric}. Therefore, for operational studies on this system, load uncertainty at bus 5 should receive priority in contingency screening and voltage-security assessment.
+
+Overall, Task 3 confirms that the developed NR solver can be reused for systematic parametric studies, not only for a single base-case solution. The same computational core used in Task 1 produced stable convergence for all 9 sensitivity cases, which supports the consistency and robustness of the implementation.
 

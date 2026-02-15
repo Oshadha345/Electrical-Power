@@ -1,17 +1,23 @@
 \contentsline {section}{\numberline {I}Task 1: Program Development}{2}{section.1}%
-\contentsline {subsection}{\numberline {\mbox {I-A}}Objective and Scope}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {\mbox {I-B}}Mathematical Formulation}{2}{subsection.1.2}%
-\contentsline {subsection}{\numberline {\mbox {I-C}}Program Workflow}{2}{subsection.1.3}%
-\contentsline {subsection}{\numberline {\mbox {I-D}}Base-Case Output Summary (Own Run)}{3}{subsection.1.4}%
-\contentsline {subsection}{\numberline {\mbox {I-E}}Technical Discussion}{3}{subsection.1.5}%
-\contentsline {section}{\numberline {II}Task 2: Verification and Comparison}{4}{section.2}%
-\contentsline {subsection}{\numberline {\mbox {II-A}}Comparison Objective}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {\mbox {II-B}}Required Data to Insert}{4}{subsection.2.2}%
-\contentsline {subsection}{\numberline {\mbox {II-C}}Figure Placeholders (to be filled after PSSE runs)}{5}{subsection.2.3}%
-\contentsline {subsection}{\numberline {\mbox {II-D}}Discussion Template}{5}{subsection.2.4}%
-\contentsline {section}{\numberline {III}Task 3: Voltage Sensitivity Analysis}{5}{section.3}%
-\contentsline {subsection}{\numberline {\mbox {III-A}}Method}{5}{subsection.3.1}%
-\contentsline {subsection}{\numberline {\mbox {III-B}}Sensitivity Ranking from Executed Notebook}{6}{subsection.3.2}%
-\contentsline {subsection}{\numberline {\mbox {III-C}}Required Voltage-Variation Tables}{6}{subsection.3.3}%
-\contentsline {subsection}{\numberline {\mbox {III-D}}Figure Placeholders}{6}{subsection.3.4}%
-\contentsline {subsection}{\numberline {\mbox {III-E}}Discussion}{7}{subsection.3.5}%
+\contentsline {subsection}{\numberline {\mbox {I-A}}Objective}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {\mbox {I-B}}Input Data Approach}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {\mbox {I-C}}Mathematical Formulation}{2}{subsection.1.3}%
+\contentsline {subsection}{\numberline {\mbox {I-D}}Program Flowcharts with Line References}{3}{subsection.1.4}%
+\contentsline {subsection}{\numberline {\mbox {I-E}}Y-bus Matrix from Code}{4}{subsection.1.5}%
+\contentsline {subsection}{\numberline {\mbox {I-F}}Convergence and Sample Iteration Output}{5}{subsection.1.6}%
+\contentsline {subsection}{\numberline {\mbox {I-G}}Execution Proof Requirement}{6}{subsection.1.7}%
+\contentsline {subsection}{\numberline {\mbox {I-H}}Task 1 Discussion}{6}{subsection.1.8}%
+\contentsline {section}{\numberline {II}Task 2: Verification and Comparison}{6}{section.2}%
+\contentsline {subsection}{\numberline {\mbox {II-A}}Scope of Verification}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {\mbox {II-B}}Custom Program Recorded Outputs}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {\mbox {II-C}}Bus Voltage and Angle Comparison}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {\mbox {II-D}}Convergence Characteristics}{7}{subsection.2.4}%
+\contentsline {subsection}{\numberline {\mbox {II-E}}Task 2 Plots}{8}{subsection.2.5}%
+\contentsline {subsection}{\numberline {\mbox {II-F}}Discussion of Deviations}{9}{subsection.2.6}%
+\contentsline {section}{\numberline {III}Task 3: Voltage Sensitivity Analysis}{9}{section.3}%
+\contentsline {subsection}{\numberline {\mbox {III-A}}Method}{9}{subsection.3.1}%
+\contentsline {subsection}{\numberline {\mbox {III-B}}Voltage Results Under Each Load Variation}{9}{subsection.3.2}%
+\contentsline {subsection}{\numberline {\mbox {III-C}}Variance and Standard Deviation Tables}{10}{subsection.3.3}%
+\contentsline {subsection}{\numberline {\mbox {III-D}}Task 3 Figures}{11}{subsection.3.4}%
+\contentsline {subsection}{\numberline {\mbox {III-E}}Discussion of Findings}{12}{subsection.3.5}%
+\contentsline {section}{References}{13}{section*.2}%
