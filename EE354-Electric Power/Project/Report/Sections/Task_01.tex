@@ -1,0 +1,123 @@
+\section{Task 1: Program Development}
+\label{sec:task1}
+
+\subsection{Objective and Scope}
+The first task is to develop a full Newton-Raphson (NR) load-flow program from first principles for the IEEE 9-bus network. The implementation reads bus, generator, line, transformer, and load data from a JSON file and computes bus voltages, power mismatches, line flows, and total system losses.
+
+\subsection{Mathematical Formulation}
+The nonlinear power-balance equations are solved in polar form using NR iteration \cite{tinney1967powerflow,grainger1994power}:
+\begin{align}
+P_i &= \sum_{k=1}^{n} |V_i||V_k|\left(G_{ik}\cos\theta_{ik} + B_{ik}\sin\theta_{ik}\right), \\
+Q_i &= \sum_{k=1}^{n} |V_i||V_k|\left(G_{ik}\sin\theta_{ik} - B_{ik}\cos\theta_{ik}\right),
+\end{align}
+with mismatch vector
+\begin{equation}
+\Delta \mathbf{f} =
+\begin{bmatrix}
+\Delta \mathbf{P} \\
+\Delta \mathbf{Q}
+\end{bmatrix},
+\end{equation}
+and update equation
+\begin{equation}
+\mathbf{J}\Delta\mathbf{x} = \Delta\mathbf{f}, \quad
+\mathbf{x}^{(k+1)} = \mathbf{x}^{(k)} + \Delta\mathbf{x},
+\end{equation}
+where
+\begin{equation}
+\mathbf{J} =
+\begin{bmatrix}
+J_1 & J_2 \\
+J_3 & J_4
+\end{bmatrix}.
+\end{equation}
+
+The solution uses:
+\begin{itemize}
+  \item Flat start for unknown states.
+  \item Bus 1 as slack bus.
+  \item Buses 2 and 3 as PV buses.
+  \item Buses 4, 5, 6, 7, 8, and 9 as PQ buses.
+  \item Convergence tolerance of $10^{-4}$ p.u. on maximum mismatch.
+\end{itemize}
+
+\subsection{Program Workflow}
+Figure~\ref{fig:task1_flowchart} is the report placeholder for the flowchart derived from the notebook logic.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering
+  Placeholder: Insert Task 1 flowchart image exported from the notebook or drawing tool.\\
+  Include blocks for input read, Y-bus build, mismatch evaluation, Jacobian formation, linear solve, state update, convergence check, and final reporting.}}
+  \caption{Task 1 Newton-Raphson program flowchart.}
+  \label{fig:task1_flowchart}
+\end{figure}
+
+\subsection{Base-Case Output Summary (Own Run)}
+Table~\ref{tab:task1_conv} summarizes the convergence behavior from the implemented solver.
+
+\begin{table}[H]
+  \centering
+  \caption{Task 1 convergence summary for IEEE 9-bus base case.}
+  \label{tab:task1_conv}
+  \begin{tabular}{lc}
+    \toprule
+    Item & Value \\
+    \midrule
+    Tolerance & $10^{-4}$ p.u. \\
+    Total iterations to convergence & 4 \\
+    Total active power loss & 4.641023 MW \\
+    Total reactive power loss & -92.160126 MVAr \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:task1_iter2} is reserved for the assignment requirement to show the second-iteration snapshot.
+
+\begin{table}[H]
+  \centering
+  \caption{Second-iteration snapshot (copy values from notebook table).}
+  \label{tab:task1_iter2}
+  \begin{tabular}{cccc}
+    \toprule
+    Bus & $|V|$ at iter-2 (p.u.) & Angle at iter-2 (deg) & Notes \\
+    \midrule
+    1 & \multicolumn{3}{c}{Insert from notebook output} \\
+    2 & \multicolumn{3}{c}{Insert from notebook output} \\
+    3 & \multicolumn{3}{c}{Insert from notebook output} \\
+    4 & \multicolumn{3}{c}{Insert from notebook output} \\
+    5 & \multicolumn{3}{c}{Insert from notebook output} \\
+    6 & \multicolumn{3}{c}{Insert from notebook output} \\
+    7 & \multicolumn{3}{c}{Insert from notebook output} \\
+    8 & \multicolumn{3}{c}{Insert from notebook output} \\
+    9 & \multicolumn{3}{c}{Insert from notebook output} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:task1_finalV} gives final voltage magnitudes and angles from the executed notebook.
+
+\begin{table}[H]
+  \centering
+  \caption{Final bus voltage profile from custom NR solver.}
+  \label{tab:task1_finalV}
+  \begin{tabular}{ccc}
+    \toprule
+    Bus & $|V|$ (p.u.) & Angle (deg) \\
+    \midrule
+    1 & 1.040000 & 0.000000 \\
+    2 & 1.025000 & 9.280008 \\
+    3 & 1.025000 & 4.664753 \\
+    4 & 1.025788 & -2.216787 \\
+    5 & 0.995631 & -3.988804 \\
+    6 & 1.012654 & -3.687395 \\
+    7 & 1.025769 & 3.719704 \\
+    8 & 1.015883 & 0.727538 \\
+    9 & 1.032353 & 1.966718 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Technical Discussion}
+The implemented NR solver converged in four iterations with stable mismatch reduction. This behavior is consistent with the expected quadratic convergence near the solution for a well-conditioned Jacobian \cite{tinney1967powerflow}. The final voltage profile is physically consistent with generator voltage control at PV buses and lower voltages near major loads. The loss values and voltage levels are also aligned with typical IEEE 9-bus benchmark behavior reported in power-system literature \cite{bergen2000power}.
+

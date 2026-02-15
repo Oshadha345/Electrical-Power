@@ -1,0 +1,51 @@
+\documentclass[12pt,onecolumn]{IEEEtran}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{newtxtext,newtxmath}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+
+\sisetup{
+  round-mode=places,
+  round-precision=6,
+  group-separator={,},
+  group-minimum-digits=4
+}
+
+\title{Development and Comparative Analysis of Load Flow Algorithms on the IEEE 9-Bus Test System}
+\author{
+  Oshadha Samarakoon \\
+  Registration No: E/21/345 \\
+  Course: EE354 Electric Power
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This report documents the implementation of a full Newton-Raphson load-flow solver for the IEEE 9-bus system, followed by method-level comparison with PSSE and voltage sensitivity analysis under independent load variations. All derivations, simulation logic, and result discussions are presented in technical form with reproducible tables and figure placeholders linked to the code workflow.
+\end{abstract}
+
+\tableofcontents
+\clearpage
+
+\input{Sections/Task_01}
+\input{Sections/Task_02}
+\input{Sections/Task_03}
+
+\clearpage
+\bibliographystyle{IEEEtran}
+\bibliography{reference}
+
+\end{document}

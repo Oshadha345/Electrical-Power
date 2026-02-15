@@ -1,0 +1,111 @@
+\section{Task 3: Voltage Sensitivity Analysis}
+\label{sec:task3}
+
+\subsection{Method}
+Each load bus was independently perturbed by scaling both active and reactive load by
+\[
+\alpha \in \{-10\%, 0\%, +10\%\},
+\]
+while keeping all other loads unchanged. For each case, the custom NR solver was executed and the bus-voltage magnitudes were recorded.
+
+For each target load bus, variance and standard deviation of voltage magnitudes were computed:
+\begin{align}
+\mathrm{Var}(V_b) &= \frac{1}{N}\sum_{m=1}^{N}(V_{b,m}-\bar{V}_b)^2, \\
+\sigma(V_b) &= \sqrt{\mathrm{Var}(V_b)}.
+\end{align}
+An aggregate ranking index was used:
+\begin{equation}
+\mathrm{RMS\_STD} = \sqrt{\frac{1}{n_b}\sum_{b=1}^{n_b} \sigma(V_b)^2 }.
+\end{equation}
+
+\subsection{Sensitivity Ranking from Executed Notebook}
+Table~\ref{tab:task3_ranking} reports the ranking metrics from the current notebook run.
+
+\begin{table}[H]
+  \centering
+  \caption{Sensitivity ranking using voltage standard-deviation metrics.}
+  \label{tab:task3_ranking}
+  \begin{tabular}{cccc}
+    \toprule
+    Target Load Bus & Mean Std Dev & Max Std Dev & RMS Std Dev \\
+    \midrule
+    5 & 0.001193 & 0.005068 & 0.001910 \\
+    6 & 0.000736 & 0.003437 & 0.001250 \\
+    8 & 0.000589 & 0.002707 & 0.001012 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The highest influence on overall bus-voltage spread is observed for \textbf{load bus 5}.
+
+\subsection{Required Voltage-Variation Tables}
+\begin{table}[H]
+  \centering
+  \caption{Voltage magnitudes under independent load variations (Bus 5 target case).}
+  \label{tab:task3_bus5}
+  \begin{tabular}{cccc}
+    \toprule
+    Variation (\%) & Bus index & Voltage magnitude (p.u.) & Remarks \\
+    \midrule
+    -10 & 1--9 & Insert from notebook sensitivity table &  \\
+    0 & 1--9 & Insert from notebook sensitivity table &  \\
+    +10 & 1--9 & Insert from notebook sensitivity table &  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Voltage magnitudes under independent load variations (Bus 6 target case).}
+  \label{tab:task3_bus6}
+  \begin{tabular}{cccc}
+    \toprule
+    Variation (\%) & Bus index & Voltage magnitude (p.u.) & Remarks \\
+    \midrule
+    -10 & 1--9 & Insert from notebook sensitivity table &  \\
+    0 & 1--9 & Insert from notebook sensitivity table &  \\
+    +10 & 1--9 & Insert from notebook sensitivity table &  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Voltage magnitudes under independent load variations (Bus 8 target case).}
+  \label{tab:task3_bus8}
+  \begin{tabular}{cccc}
+    \toprule
+    Variation (\%) & Bus index & Voltage magnitude (p.u.) & Remarks \\
+    \midrule
+    -10 & 1--9 & Insert from notebook sensitivity table &  \\
+    0 & 1--9 & Insert from notebook sensitivity table &  \\
+    +10 & 1--9 & Insert from notebook sensitivity table &  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Figure Placeholders}
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering Placeholder:\\Insert voltage profile plot generated in notebook cell ``Task-3: Bus Voltage Profiles under Independent Load Variations''.}}
+  \caption{Bus-voltage profiles for each target load bus under -10\%, 0\%, and +10\% load variation.}
+  \label{fig:task3_profiles}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering Placeholder:\\Insert sensitivity ranking bar chart generated in notebook cell ``Task-3 Sensitivity Ranking''.}}
+  \caption{Sensitivity ranking by RMS standard deviation index.}
+  \label{fig:task3_rank}
+\end{figure}
+
+\subsection{Discussion}
+The sensitivity analysis indicates that perturbations at bus 5 produce the largest voltage spread throughout the network. This result is consistent with the bus location relative to major power-transfer paths and local reactive demand. Buses 6 and 8 show lower system-wide influence for the same $\pm10\%$ perturbation range.
+
+For final submission, expand this section to a 2--3 page technical discussion that includes:
+\begin{itemize}
+  \item Why bus 5 is more influential from a network perspective.
+  \item How voltage profile changes vary by electrical distance.
+  \item Practical implications for voltage support and load management.
+\end{itemize}
+

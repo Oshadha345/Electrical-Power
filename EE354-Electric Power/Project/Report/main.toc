@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {I}Task 1: Program Development}{2}{section.1}%
+\contentsline {subsection}{\numberline {\mbox {I-A}}Objective and Scope}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {\mbox {I-B}}Mathematical Formulation}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {\mbox {I-C}}Program Workflow}{2}{subsection.1.3}%
+\contentsline {subsection}{\numberline {\mbox {I-D}}Base-Case Output Summary (Own Run)}{3}{subsection.1.4}%
+\contentsline {subsection}{\numberline {\mbox {I-E}}Technical Discussion}{3}{subsection.1.5}%
+\contentsline {section}{\numberline {II}Task 2: Verification and Comparison}{4}{section.2}%
+\contentsline {subsection}{\numberline {\mbox {II-A}}Comparison Objective}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {\mbox {II-B}}Required Data to Insert}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {\mbox {II-C}}Figure Placeholders (to be filled after PSSE runs)}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {\mbox {II-D}}Discussion Template}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {III}Task 3: Voltage Sensitivity Analysis}{5}{section.3}%
+\contentsline {subsection}{\numberline {\mbox {III-A}}Method}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {\mbox {III-B}}Sensitivity Ranking from Executed Notebook}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {\mbox {III-C}}Required Voltage-Variation Tables}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {\mbox {III-D}}Figure Placeholders}{6}{subsection.3.4}%
+\contentsline {subsection}{\numberline {\mbox {III-E}}Discussion}{7}{subsection.3.5}%

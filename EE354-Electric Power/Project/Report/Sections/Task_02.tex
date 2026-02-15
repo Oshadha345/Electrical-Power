@@ -1,0 +1,133 @@
+\section{Task 2: Verification and Comparison}
+\label{sec:task2}
+
+\subsection{Comparison Objective}
+This section compares the custom NR solver outputs against PSSE results obtained using:
+\begin{itemize}
+  \item Full Newton-Raphson,
+  \item Gauss-Seidel,
+  \item Fast Decoupled Load Flow.
+\end{itemize}
+The focus is on numerical accuracy, convergence behavior, and discussion of deviations \cite{stott1974fast,siemens_psse}.
+
+\subsection{Required Data to Insert}
+Populate this section after running PSSE using the same network and loading conditions used in Task 1.
+
+\begin{table}[H]
+  \centering
+  \caption{Bus voltage magnitude comparison (custom NR vs PSSE methods).}
+  \label{tab:task2_vm_compare}
+  \begin{tabular}{ccccc}
+    \toprule
+    Bus & Custom NR & PSSE NR & PSSE GS & PSSE FDLF \\
+    \midrule
+    1 &  &  &  &  \\
+    2 &  &  &  &  \\
+    3 &  &  &  &  \\
+    4 &  &  &  &  \\
+    5 &  &  &  &  \\
+    6 &  &  &  &  \\
+    7 &  &  &  &  \\
+    8 &  &  &  &  \\
+    9 &  &  &  &  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Bus angle comparison (degrees).}
+  \label{tab:task2_angle_compare}
+  \begin{tabular}{ccccc}
+    \toprule
+    Bus & Custom NR & PSSE NR & PSSE GS & PSSE FDLF \\
+    \midrule
+    1 &  &  &  &  \\
+    2 &  &  &  &  \\
+    3 &  &  &  &  \\
+    4 &  &  &  &  \\
+    5 &  &  &  &  \\
+    6 &  &  &  &  \\
+    7 &  &  &  &  \\
+    8 &  &  &  &  \\
+    9 &  &  &  &  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Convergence and loss comparison across methods.}
+  \label{tab:task2_conv_compare}
+  \begin{tabular}{lccc}
+    \toprule
+    Method & Iterations & Total $P_{loss}$ (MW) & Notes \\
+    \midrule
+    Custom NR &  &  &  \\
+    PSSE NR &  &  &  \\
+    PSSE GS &  &  &  \\
+    PSSE FDLF &  &  &  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Figure Placeholders (to be filled after PSSE runs)}
+
+% TODO FIGURE 1 (Required):
+% Export a line or bar plot for bus voltage magnitudes (Bus 1-9) with four traces:
+% (a) Custom NR (from notebook final_bus_df: |V| column),
+% (b) PSSE Full NR,
+% (c) PSSE Gauss-Seidel,
+% (d) PSSE Fast Decoupled.
+% Suggested file name: Figures/task2_voltage_magnitude_comparison.pdf
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering Placeholder for Figure 1:\\Voltage magnitude comparison across four methods.}}
+  \caption{Bus voltage magnitude comparison: custom solver and PSSE methods.}
+  \label{fig:task2_vm}
+\end{figure}
+
+% TODO FIGURE 2 (Required):
+% Export a line or bar plot for bus voltage angles (deg, Bus 1-9) with the same four traces.
+% Suggested file name: Figures/task2_voltage_angle_comparison.pdf
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering Placeholder for Figure 2:\\Voltage angle comparison across four methods.}}
+  \caption{Bus voltage angle comparison: custom solver and PSSE methods.}
+  \label{fig:task2_angle}
+\end{figure}
+
+% TODO FIGURE 3 (Required):
+% Create a bar chart of iteration counts by method:
+% Custom NR, PSSE NR, PSSE GS, PSSE FDLF.
+% Suggested file name: Figures/task2_iterations_comparison.pdf
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering Placeholder for Figure 3:\\Iteration-count comparison for convergence behavior.}}
+  \caption{Convergence comparison using iteration counts.}
+  \label{fig:task2_iter}
+\end{figure}
+
+% TODO FIGURE 4 (Recommended):
+% Build an absolute error plot for |V| and angle relative to PSSE NR benchmark:
+% Error(|V|) = |V_custom - V_PSSE_NR|,
+% Error(theta) = |theta_custom - theta_PSSE_NR|.
+% Suggested file name: Figures/task2_error_profile.pdf
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\linewidth}{\centering Placeholder for Figure 4:\\Absolute error profile against PSSE NR baseline.}}
+  \caption{Absolute voltage and angle deviations relative to PSSE NR.}
+  \label{fig:task2_error}
+\end{figure}
+
+\subsection{Discussion Template}
+Discuss the following points using your own PSSE data:
+\begin{itemize}
+  \item Agreement between custom NR and PSSE NR for both $|V|$ and angle.
+  \item Iteration trends: expected faster convergence of NR and FDLF compared with GS.
+  \item Numerical differences due to model assumptions (tap details, tolerances, initialization, and stopping criteria).
+  \item Practical interpretation: trade-off between computational speed and numerical robustness.
+\end{itemize}
+
+Use this section to write a technical paragraph-based comparison in your own words to satisfy submission originality requirements.
+
