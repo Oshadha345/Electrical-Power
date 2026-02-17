@@ -62,11 +62,11 @@ Model settings used in code:
 \end{itemize}
 
 \subsection{Program Flowcharts with Line References}
-The assignment asks for flowcharts with line references. Figures~\ref{fig:project_flow}, \ref{fig:task1_code_flow}, and \ref{fig:task1_nr_flow} are the exported flowcharts corresponding to the final script.
+Following charts are the flow charts with line references. Figures~\ref{fig:project_flow}, \ref{fig:task1_code_flow}, and \ref{fig:task1_nr_flow} are the exported flowcharts corresponding to the final script.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.92\linewidth]{\detokenize{Figures/Project Flow.png}}
+  \includegraphics[width=0.92\linewidth]{\detokenize{Figures/Project_Flow.png}}
   \caption{Overall project workflow used to organize Tasks 1--3.}
   \label{fig:project_flow}
 \end{figure}
@@ -87,11 +87,11 @@ The assignment asks for flowcharts with line references. Figures~\ref{fig:projec
 
 \subsection{Y-bus Matrix from Code}
 The Y-bus matrix is built directly from line/transformer data in code (no hand calculation).  
-The real and imaginary parts are shown in Tables~\ref{tab:ybus_real} and \ref{tab:ybus_imag}.
+The \textbf{real and imaginary parts} are shown in Tables~\ref{tab:ybus_real} and \ref{tab:ybus_imag}.
 
 \begin{table}[H]
 \centering
-\caption{Real part of \(Y_{bus}\) (p.u.).}
+\caption{\textbf{Real} part of \(Y_{bus}\) (p.u.).}
 \label{tab:ybus_real}
 \scriptsize
 \resizebox{\textwidth}{!}{
@@ -115,7 +115,7 @@ Bus & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
 
 \begin{table}[H]
 \centering
-\caption{Imaginary part of \(Y_{bus}\) (p.u.).}
+\caption{\textbf{Imaginary} part of \(Y_{bus}\) (p.u.).}
 \label{tab:ybus_imag}
 \scriptsize
 \resizebox{\textwidth}{!}{
@@ -156,7 +156,7 @@ Bus & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
 
 \begin{table}[H]
   \centering
-  \caption{Second-iteration bus snapshot (assignment deliverable).}
+  \caption{\textbf{Second-iteration} bus snapshot.}
   \label{tab:task1_iter2}
   \scriptsize
   \begin{tabular}{ccccc}
@@ -179,21 +179,21 @@ Bus & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
 
 \begin{table}[H]
   \centering
-  \caption{Final bus voltage profile from custom NR solver.}
+  \caption{Final bus profile from custom NR solver.}
   \label{tab:task1_finalV}
-  \begin{tabular}{ccc}
+  \begin{tabular}{ccccc}
     \toprule
-    Bus & \(|V|\) (p.u.) & Angle (deg) \\
+    Bus & \(|V|\) (p.u.) & Angle (deg) & \(P_{injection}\) (MW) & \(Q_{injection}\) (MVAr) \\
     \midrule
-    1 & 1.040000 & 0.000000 \\
-    2 & 1.025000 & 9.280008 \\
-    3 & 1.025000 & 4.664753 \\
-    4 & 1.025788 & -2.216787 \\
-    5 & 0.995631 & -3.988804 \\
-    6 & 1.012654 & -3.687395 \\
-    7 & 1.025769 & 3.719704 \\
-    8 & 1.015883 & 0.727538 \\
-    9 & 1.032353 & 1.966718 \\
+    1 & 1.040000 & 0.000000 & 71.641012 & 27.045892 \\
+    2 & 1.025000 & 9.280008 & 163.000003 & 6.653621 \\
+    3 & 1.025000 & 4.664753 & 85.000001 & -10.859733 \\
+    4 & 1.025788 & -2.216787 & -0.000008 & 0.000006 \\
+    5 & 0.995631 & -3.988804 & -125.000009 & -49.999972 \\
+    6 & 1.012654 & -3.687395 & -90.000008 & -29.999988 \\
+    7 & 1.025769 & 3.719704 & 0.000034 & 0.000033 \\
+    8 & 1.015883 & 0.727538 & -100.000018 & -34.999992 \\
+    9 & 1.032353 & 1.966718 & 0.000016 & 0.000008 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -222,13 +222,22 @@ Bus & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
 \end{table}
 
 \subsection{Execution Proof Requirement}
-The source code prints student identification and timestamp at runtime:
-\begin{itemize}
-  \item \texttt{Student Name: Samarakoon S.M.O.T.}
-  \item \texttt{Student ID: E/21/345}
-  \item \texttt{Run Timestamp: YYYY-MM-DD HH:MM:SS}
-\end{itemize}
-This directly supports the required submission screenshot condition.
+The source code prints student identification and timestamp at runtime. Executed outputs are as follows, with screenshots provided in Figure~\ref{fig:task1_execution_proof}.
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[width=0.45\linewidth]{\detokenize{Figures/Outputs/Task01-Program_Output_1.png}} &
+    \includegraphics[width=0.45\linewidth]{\detokenize{Figures/Outputs/Task01-Program_Output_2.png}} \\
+  \end{tabular}
+  \\[0.5cm]
+  \begin{tabular}{c}
+    \includegraphics[width=0.45\linewidth]{\detokenize{Figures/Outputs/Task01-Program_Output_3.png}}
+  \end{tabular}
+  \caption{Execution proof showing program output with student ID and timestamp.}
+  \label{fig:task1_execution_proof}
+\end{figure}
+
 
 \subsection{Task 1 Discussion}
 The custom NR solver converged in four iterations with monotonic mismatch reduction. The solved operating point and branch-flow pattern are consistent with textbook IEEE 9-bus behavior and with expected NR convergence properties \cite{tinney1967powerflow,saadat1999power,chapman2011electric}. The transformer branches carry no active loss due zero resistance assumptions in the provided dataset, while transmission lines account for the net active losses. The obtained loss level (about 4.64 MW) is reasonable for this loading pattern and network parameters.

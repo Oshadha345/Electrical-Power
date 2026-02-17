@@ -12,6 +12,7 @@
 \usepackage{siunitx}
 \usepackage{float}
 \usepackage[hidelinks]{hyperref}
+\usepackage[justification=centering]{caption}
 
 \sisetup{
   round-mode=places,
@@ -32,14 +33,17 @@
 \maketitle
 
 \begin{abstract}
-This report documents the implementation of a full Newton-Raphson load-flow solver for the IEEE 9-bus system, followed by method-level comparison with PSSE and voltage sensitivity analysis under independent load variations. All derivations, simulation logic, and result discussions are presented in technical form with reproducible tables and figure placeholders linked to the code workflow.
+This report documents the implementation of a full Newton-Raphson load-flow solver for the IEEE 9-bus system, followed by method-level comparison with PSSE and voltage sensitivity analysis under independent load variations. All derivations, simulation logic, and result discussions are presented in technical form with reproducible tables and figure placeholders linked to the code workflow. The complete source code for this project is available at \url{https://github.com/Oshadha345/Electrical-Power/tree/main/EE354-Electric\%20Power/Project}.
 \end{abstract}
 
 \tableofcontents
 \clearpage
 
 \input{Sections/Task_01}
+\newpage
 \input{Sections/Task_02}
+\newpage
+
 \input{Sections/Task_03}
 
 \clearpage
