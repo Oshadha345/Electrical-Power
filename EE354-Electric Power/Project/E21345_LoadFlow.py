@@ -28,8 +28,8 @@ DEFAULT_MAX_ITER = 30
 @dataclass
 class SystemModel:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Keeps all processed system data in one place.
+    Name: Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Keeps all processed system data in one place.
     """
 
     base_mva: float
@@ -50,8 +50,8 @@ class SystemModel:
 
 def load_json_data(json_path: Path) -> dict:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Reads the json file and returns parsed python data.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Reads the json file and returns parsed python data.
     """
 
     with json_path.open("r", encoding="utf-8") as file:
@@ -60,8 +60,8 @@ def load_json_data(json_path: Path) -> dict:
 
 def make_system_model(raw_data: dict, base_mva: float, slack_bus: int = 1) -> SystemModel:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Builds bus sets and per-unit power specs from input data.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Builds bus sets and per-unit power specs from input data.
     """
 
     buses = raw_data["bus_data"]["buses"]
@@ -147,8 +147,8 @@ def make_system_model(raw_data: dict, base_mva: float, slack_bus: int = 1) -> Sy
 
 def build_ybus(system: SystemModel) -> np.ndarray:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Creates Y-bus matrix from line and transformer records.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Creates Y-bus matrix from line and transformer records.
     """
 
     n_bus = len(system.bus_numbers)
@@ -177,8 +177,8 @@ def build_ybus(system: SystemModel) -> np.ndarray:
 
 def calc_power_injections(v_mag: np.ndarray, theta: np.ndarray, y_bus: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Computes calculated P and Q injections at all buses.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Computes calculated P and Q injections at all buses.
     """
 
     voltage = v_mag * np.exp(1j * theta)
@@ -187,18 +187,10 @@ def calc_power_injections(v_mag: np.ndarray, theta: np.ndarray, y_bus: np.ndarra
     return power.real, power.imag
 
 
-def build_jacobian(
-    v_mag: np.ndarray,
-    theta: np.ndarray,
-    y_bus: np.ndarray,
-    angle_idx: List[int],
-    pq_idx: List[int],
-    p_calc: np.ndarray,
-    q_calc: np.ndarray,
-) -> np.ndarray:
+def build_jacobian( v_mag: np.ndarray, theta: np.ndarray, y_bus: np.ndarray, angle_idx: List[int], pq_idx: List[int], p_calc: np.ndarray, q_calc: np.ndarray ) -> np.ndarray:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Builds full Jacobian matrix (J1, J2, J3, J4).
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Descrtiption : Builds full Jacobian matrix (J1, J2, J3, J4).
     """
 
     g_mat = y_bus.real
@@ -255,15 +247,10 @@ def build_jacobian(
     return np.block([[j1, j2], [j3, j4]])
 
 
-def run_newton_raphson(
-    system: SystemModel,
-    y_bus: np.ndarray,
-    tol: float,
-    max_iter: int,
-) -> dict:
+def run_newton_raphson( system: SystemModel, y_bus: np.ndarray, tol: float, max_iter: int ) -> dict:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Solves load flow using full Newton-Raphson iterations.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Fucntion Brief Description : Solves load flow using full Newton-Raphson iterations.
     """
 
     n_bus = len(system.bus_numbers)
@@ -339,8 +326,8 @@ def run_newton_raphson(
 
 def compute_branch_flows(system: SystemModel, v_mag: np.ndarray, theta: np.ndarray) -> Tuple[List[dict], complex]:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Computes branch power flows and total system losses.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Computes branch power flows and total system losses.
     """
 
     voltage = v_mag * np.exp(1j * theta)
@@ -382,8 +369,8 @@ def compute_branch_flows(system: SystemModel, v_mag: np.ndarray, theta: np.ndarr
 
 def print_banner(json_path: Path, tol: float) -> None:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Prints execution proof details for screenshot.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Prints execution proof details for screenshot.
     """
 
     print("=" * 88)
@@ -398,8 +385,8 @@ def print_banner(json_path: Path, tol: float) -> None:
 
 def print_iteration_history(history: List[dict]) -> None:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Prints max mismatch per iteration.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Desc : Prints max mismatch per iteration.
     """
 
     print("\nConvergence trace (max mismatch):")
@@ -413,8 +400,8 @@ def print_iteration_history(history: List[dict]) -> None:
 
 def print_second_iteration(system: SystemModel, result: dict) -> None:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Prints second-iteration values for assignment sample output.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Prints second-iteration values for assignment sample output.
     """
 
     print("\nSample output required by assignment: 2nd iteration results")
@@ -448,8 +435,8 @@ def print_second_iteration(system: SystemModel, result: dict) -> None:
 
 def print_final_bus_results(system: SystemModel, result: dict) -> None:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Prints final solved bus voltages and injections.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Prints final solved bus voltages and injections.
     """
 
     print("\nFinal bus voltages and injections:")
@@ -480,8 +467,8 @@ def print_final_bus_results(system: SystemModel, result: dict) -> None:
 
 def print_branch_results(flow_rows: List[dict], total_loss: complex) -> None:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Prints branch flows and total losses.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Prints branch flows and total losses.
     """
 
     print("\nLine/transformer power flows:")
@@ -507,8 +494,8 @@ def print_branch_results(flow_rows: List[dict], total_loss: complex) -> None:
 
 def parse_cli_args() -> argparse.Namespace:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Parses command line options for data path and solver settings.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Parses command line options for data path and solver settings.
     """
 
     parser = argparse.ArgumentParser(
@@ -537,8 +524,8 @@ def parse_cli_args() -> argparse.Namespace:
 
 def main() -> None:
     """
-    Author: Samarakoon S.M.O.T. (E/21/345)
-    Brief : Main entry point. Runs whole Task-1 workflow and prints outputs.
+    Name : Samarakoon S.M.O.T. (E/21/345)
+    Function Brief Description : Main entry point. Runs whole Task-1 workflow and prints outputs.
     """
 
     args = parse_cli_args()

@@ -14,6 +14,15 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage[justification=centering]{caption}
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    citecolor=blue,  % Color for bibliographical citations
+    urlcolor=blue,   % Color for external URLs
+    linkcolor=black  % Internal links like Table of Contents
+}
+
+
 \sisetup{
   round-mode=places,
   round-precision=6,
@@ -33,7 +42,7 @@
 \maketitle
 
 \begin{abstract}
-This report documents the implementation of a full Newton-Raphson load-flow solver for the IEEE 9-bus system, followed by method-level comparison with PSSE and voltage sensitivity analysis under independent load variations. All derivations, simulation logic, and result discussions are presented in technical form with reproducible tables and figure placeholders linked to the code workflow. The complete source code for this project is available at \url{https://github.com/Oshadha345/Electrical-Power/tree/main/EE354-Electric\%20Power/Project}.
+This report documents the implementation of a full Newton-Raphson load-flow solver for the IEEE 9-bus system, followed by method-level comparison with PSSE and voltage sensitivity analysis under independent load variations. All derivations, simulation logic, and result discussions are presented in technical form with reproducible tables and figure placeholders linked to the code workflow. The complete source code for this project is available at:\newline \url{https://github.com/Oshadha345/Electrical-Power/tree/main/EE354-Electric\%20Power/Project}.
 \end{abstract}
 
 \tableofcontents

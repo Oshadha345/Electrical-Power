@@ -2,7 +2,7 @@
 \label{sec:task3}
 
 \subsection{Method}
-Each load bus (\(5,6,8\)) was perturbed independently by scaling both active and reactive demand with:
+Each load bus (\(5,6,8\)) was changed independently by scaling both active and reactive demand with:
 \[
 \alpha \in \{-10\%,0\%,+10\%\},
 \]
@@ -15,7 +15,7 @@ For each target load bus, voltage spread was quantified using:
 \end{align}
 To rank overall influence:
 \[
-\mathrm{RMS\_STD}_k = \sqrt{\frac{1}{n_b}\sum_{b=1}^{n_b}\sigma_b^2}.
+\mathrm{RMS\_{STD}}_k = \sqrt{\frac{1}{n_b}\sum_{b=1}^{n_b}\sigma_b^2}.
 \]
 
 \subsection{Voltage Results Under Each Load Variation}
@@ -165,13 +165,13 @@ To rank overall influence:
 \end{figure}
 
 \subsection{Discussion of Findings}
-The sensitivity ranking in Table~\ref{tab:task3_ranking} shows a clear order: bus 5 has the highest network-wide voltage influence, followed by bus 6, then bus 8. This ordering is physically reasonable for the given IEEE 9-bus topology and loading pattern. Bus 5 is connected to bus 4 and bus 7 paths that carry significant active and reactive transfers, so perturbing this load causes larger redistribution of currents and voltage drops in multiple corridors.
+The sensitivity ranking in Table~\ref{tab:task3_ranking} shows a clear order: bus 5 has the highest network-wide voltage influence, followed by bus 6, then bus 8. This ordering is physically reasonable for the given IEEE 9-bus topology and loading pattern. Bus 5 is connected to bus 4 and bus 7 paths that carry significant active and reactive transfers, so changing this load causes larger redistribution of currents and voltage drops in multiple corridors.
 
 The variation tables indicate that generator buses 1--3 remain fixed at their voltage setpoints for all perturbations, which matches PV/slack bus modeling. Most sensitivity appears on PQ buses, especially near the disturbed load bus and along electrically close paths. For the bus-5 perturbation case, \(V_5\) has the largest spread (\(\sigma=0.005068\)), while nearby buses 4, 6, and 7 also show notable changes.
 
-For the bus-6 perturbation case, the largest spread occurs at \(V_6\), and the propagated effect on buses 4, 5, 8, and 9 is moderate. For the bus-8 perturbation case, \(V_8\) dominates the spread, but the global RMS impact is still smaller than the bus-5 case. This confirms that sensitivity is not only a function of local load size; it also depends on electrical coupling and reactive support paths.
+For the bus-6 load variation case, the largest spread occurs at \(V_6\), and the propagated effect on buses 4, 5, 8, and 9 is moderate. For the bus-8 case, \(V_8\) dominates the spread, but the global RMS impact is still smaller than the bus-5 case. This confirms that sensitivity is not only a function of local load size; it also depends on electrical coupling and reactive support paths.
 
-From a planning viewpoint, these results suggest that bus 5 is the most critical candidate for voltage-support actions under demand uncertainty (e.g., local reactive compensation, dynamic VAR support, or tighter operational monitoring). In contrast, bus-8 variations are relatively better contained and less disruptive to the whole system.
+From a planning viewpoint, these results suggest that bus 5 is the most critical candidate for voltage-support actions under demand uncertainty (e.g., local reactive compensation, dynamic VAR support, or tighter operational monitoring)~\cite{saadat1999power}. In contrast, bus-8 variations are relatively better contained and less disruptive to the whole system.
 
 The trend is aligned with common load-flow interpretation in standard references: voltage sensitivity rises with stronger network coupling and weaker local reactive margin \cite{saadat1999power,bergen2000power,chapman2011electric}. Therefore, for operational studies on this system, load uncertainty at bus 5 should receive priority in contingency screening and voltage-security assessment.
 

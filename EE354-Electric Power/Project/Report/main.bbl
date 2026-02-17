@@ -38,6 +38,16 @@ H.~Saadat, \emph{Power System Analysis}, 2nd~ed.\hskip 1em plus 0.5em minus
 S.~J. Chapman, \emph{Electric Machinery Fundamentals}, 5th~ed.\hskip 1em plus
   0.5em minus 0.4em\relax McGraw-Hill, 2011.
 
+\bibitem{PSSEAnalyticsResults}
+O.~Samarakoon, ``Psse analytics results,''
+  \url{https://github.com/Oshadha345/Electrical-Power/blob/main/EE354-Electric%20Power/Project/PSSE%20data.md},
+  2026.
+
+\bibitem{BusBasedReport}
+------, ``Bus based power flow analysis report,''
+  \url{https://github.com/Oshadha345/Electrical-Power/blob/main/EE354-Electric%20Power/Project/Bus%20Based%20Report.pdf},
+  2026.
+
 \bibitem{stott1974fast}
 B.~Stott and O.~Alsac, ``Fast decoupled load flow,'' \emph{IEEE Transactions on
   Power Apparatus and Systems}, vol. PAS-93, no.~3, pp. 859--869, 1974.

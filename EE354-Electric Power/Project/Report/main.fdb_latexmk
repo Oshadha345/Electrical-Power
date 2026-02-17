@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1771340581.88159 "main.aux" "main.bbl" "main" 1771340852.25704 0
-  "./reference.bib" 1771340545.87575 3019 6de69bb9b56ace69fe355ce994579a38 ""
+["bibtex main"] 1771344424.14168 "main.aux" "main.bbl" "main" 1771344468.30449 0
+  "./reference.bib" 1771343011.25573 2721 8794e4954d602b9063d6ad2329bd6d17 ""
   "C:/Users/HUAWEI/AppData/Local/Programs/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1771340850.15926 12397 43d019710e56b5345f82cc2a35cbfe82 "pdflatex"
+  "main.aux" 1771344463.88315 12482 e2f5338dfa3c36150416ddf960c625e8 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1771340818.65022 "s:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/EE354-Electric Power/Project/Report/main.tex" "main.pdf" "main" 1771340852.26004 2
+["pdflatex"] 1771344424.83798 "s:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/EE354-Electric Power/Project/Report/main.tex" "main.pdf" "main" 1771344468.30449 0
   "C:/Users/HUAWEI/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1771146755.24631 163207 8b397a28da8cf491d72adf658ad1aa93 ""
   "C:/Users/HUAWEI/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1771146732.5347 13334346 928699c384900de799c6ed008a8345cd ""
   "C:/Users/HUAWEI/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 1194fb36dfcb11d9ae9802f2b00b60a3 ""
@@ -161,7 +161,7 @@
   "C:/Users/HUAWEI/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1656236919 4937 4ce600ce9bd4ec84d0250eb6892fcf4f ""
   "C:/Users/HUAWEI/AppData/Local/Programs/MiKTeX/tex/latex/xpatch/xpatch.sty" 1585221260 8510 9829c50ab36366d4da41fdc87e7d0699 ""
   "C:/Users/HUAWEI/AppData/Local/Programs/MiKTeX/tex/latex/xstring/xstring.sty" 1693735632 123 a302f2c651a95033260db60e51527ae8 ""
-  "Figures/Outputs/Task01-Program_Output_1.png" 0 -1 0 ""
+  "Figures/Outputs/Task01-Program_Output_1.png" 1771182290.69177 166210 d11085f11b4155729926501df64a71e4 ""
   "Figures/Outputs/Task01-Program_Output_2.png" 1771182345.56509 152283 75c71aab98eed361ec47ce33883d738d ""
   "Figures/Outputs/Task01-Program_Output_3.png" 1771182390.53669 161137 5a398a6b1d8d52da5c1b2eeb05b664c1 ""
   "Figures/Project_Flow.png" 1771174969.87478 5907669 2840c37deff44001c26a1bb8a1c1f0ba ""
@@ -173,13 +173,13 @@
   "Figures/task3_sensitivity_ranking.png" 1771184870.59515 22136 d9039c4ae0fb933a2cdf0586203d9db7 ""
   "Figures/task3_voltage_profiles.png" 1771184828.56644 90141 3f1ab781d8e5cabc535cc3ae6c42537c ""
   "Sections/Task_01.tex" 1771339983.10149 10428 2c14721d8212a704a3af698f29bc44cb ""
-  "Sections/Task_02.tex" 1771340816.80446 5317 9dee3e40213a086f848842624bf516b6 ""
-  "Sections/Task_03.tex" 1771185821.84301 8044 c8eb9bb936f3df36597b316e36d2416c ""
-  "main.aux" 1771340850.15926 12397 43d019710e56b5345f82cc2a35cbfe82 "pdflatex"
-  "main.bbl" 1771340582.33824 2090 45ed5a94d23b3d95e774edcc3673866f "bibtex main"
-  "main.out" 1771340850.18896 4299 e7308d9bef7be4c9974d79f478606e04 "pdflatex"
-  "main.toc" 1771340850.19245 2215 6cb2afc38e3175cee9b18511800b0fc6 "pdflatex"
-  "s:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/EE354-Electric Power/Project/Report/main.tex" 1771340830.61937 1516 953fe5c642c7e88d5250a66d4a855118 ""
+  "Sections/Task_02.tex" 1771344380.62285 5099 115be26495f409fa55f7bf7e76b16a8f ""
+  "Sections/Task_03.tex" 1771344380.43173 8054 3f0423c38091b4d54d96c95300a877b9 ""
+  "main.aux" 1771344463.88315 12482 e2f5338dfa3c36150416ddf960c625e8 "pdflatex"
+  "main.bbl" 1771344424.69545 2501 06fb0cf0855154324ff3eec8b3fcb41a "bibtex main"
+  "main.out" 1771344464.20704 4299 e7308d9bef7be4c9974d79f478606e04 "pdflatex"
+  "main.toc" 1771344464.20704 2215 6cb2afc38e3175cee9b18511800b0fc6 "pdflatex"
+  "s:/Semester 4/EE255 - Electrical Power/NoteBook/Electrical-Power/EE354-Electric Power/Project/Report/main.tex" 1771342849.02997 1752 84ba5fd26016dae8641e48242daaf870 ""
   (generated)
   "main.aux"
   "main.log"

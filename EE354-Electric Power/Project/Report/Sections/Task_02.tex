@@ -8,7 +8,7 @@ Task 2 verifies the custom NR program against PSSE outputs and compares:
   \item convergence behavior of NR, GS, and FDLF,
   \item likely reasons for observed differences.
 \end{itemize}
-PSSE data were taken from the uploaded solver logs ~\cite{PSSE_Analytics_Results} and bus report file ~\cite{Bus_Based_Report} .
+PSSE data were taken from the uploaded solver logs ~\cite{PSSEAnalyticsResults} and bus report file ~\cite{BusBasedReport} .
 
 \subsection{Custom Program Recorded Outputs}
 From the custom Task-1 run:
@@ -83,11 +83,10 @@ From the custom Task-1 run:
   \label{tab:task2_loss}
   \begin{tabular}{lcc}
     \toprule
-    Method & Total \(P_{loss}\) (MW) & Note \\
+    Method & Total \(P_{loss}\) (MW) \\
     \midrule
-    Custom NR & 4.641023 & From program branch-flow summation \\
-    PSSE bus report & 4.6 (approx.) & From rounded branch MW values in uploaded report \\
-    PSSE GS / FDLF & -- & \textit{TODO: export method-specific branch report if strict per-method loss is required} \\
+    Custom NR & 4.641023 \\
+    PSSE bus report & 4.6 (approx.) \\
     \bottomrule
   \end{tabular}
 \end{table}
